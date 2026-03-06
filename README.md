@@ -1,40 +1,20 @@
-This is a Kotlin Multiplatform project targeting Android, Desktop (JVM).
+# 칸반 보드 태스크
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+# 기능 구현 사항
 
-### Build and Run Android Application
-
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
-
-### Build and Run Desktop (JVM) Application
-
-To build and run the development version of the desktop app, use the run configuration from the run widget
-in your IDE’s toolbar or run it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:run
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:run
-  ```
-
----
-
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+- [x] Card 구현
+    - [x] 배경색 설정
+    - [x] Card 테두리 색상, radius 설정
+- [x] title 구현
+  - [x] 폰트 크기, 색상 설정
+  - [x] maxLine 1줄로 제한, 말줄임표 구현
+- [x] script 구현
+    - [x] maxLine 2줄로 제한, 말줄임표 구현
+- [x] tag 구현
+    - [x] 태그 글자 수 최대 5자
+    - [x] 태그 개수 0 ~ 5개 제한
+    - [x] 태그 UI 구현
+- [x] 구분선 구현
+- [x] 프로필 섹션 구현
+    - [x] Row로 아이콘, 담당자 섹션 나누기
+    - [x] 담당자 텍스트 maxLine 1줄 제한, 말줄임표 구현
