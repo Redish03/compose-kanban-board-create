@@ -10,6 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kanbanboard.composeapp.generated.resources.Res
@@ -34,4 +37,33 @@ fun Profile(nickname: String) {
             overflow = TextOverflow.Ellipsis,
         )
     }
+}
+
+@Composable
+@Preview
+private fun ProfilePreview(@PreviewParameter(ProfilePreviewParameterProvider::class) nickname: String) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Image(
+            painter = painterResource(Res.drawable.profile),
+            contentDescription = "프로필 이미지",
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = nickname,
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold,
+            color = CustomColor.PROFILE_NICKNAME.color,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
+    }
+}
+
+private class ProfilePreviewParameterProvider() : PreviewParameterProvider<String> {
+    override val values = sequenceOf<String>(
+        "다이노",
+        "프로필",
+        "닉네임",
+        "아주아주매우매우긴닉네임",
+    )
 }
