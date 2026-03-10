@@ -7,6 +7,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.runComposeUiTest
 import org.junit.Test
+import woowacourse.kanban.board.component.task.TaskCard
 
 @OptIn(ExperimentalTestApi::class)
 class TaskCardTest {
