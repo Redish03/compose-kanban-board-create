@@ -3,7 +3,7 @@ package woowacourse.kanban.board
 import androidx.compose.ui.graphics.Color
 
 enum class CustomColor(
-    val color: Color
+    val color: Color,
 ) {
     CARD_BORDER(Color(0xFFE5E7EB)),
     DIVIDER(Color(0xFFF3F4F6)),
