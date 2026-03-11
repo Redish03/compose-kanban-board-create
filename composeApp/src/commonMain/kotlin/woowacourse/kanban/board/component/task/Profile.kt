@@ -21,8 +21,11 @@ import org.jetbrains.compose.resources.painterResource
 import woowacourse.kanban.board.CustomColor
 
 @Composable
-fun Profile(nickname: String) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+fun Profile(nickname: String, modifier: Modifier = Modifier) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier,
+    ) {
         Image(
             painter = painterResource(Res.drawable.profile),
             contentDescription = "프로필 이미지",

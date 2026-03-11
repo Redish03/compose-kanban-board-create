@@ -46,7 +46,7 @@ fun TaskCard(
                 thickness = 1.dp,
                 color = CustomColor.DIVIDER.color,
             )
-            Profile(nickname)
+            Profile(nickname, modifier = Modifier)
         }
     }
 }

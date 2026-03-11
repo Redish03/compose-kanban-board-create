@@ -25,9 +25,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import woowacourse.kanban.board.CustomColor
+import woowacourse.kanban.board.component.task.Profile
 
 @Composable
-fun newTaskForm() {
+fun NewTaskForm() {
     Column(
         modifier = Modifier
             .size(672.dp, 654.dp)
@@ -41,6 +42,17 @@ fun newTaskForm() {
             text = "태그",
             hintText = "태그를 쉼표로 구분하여 입력하세요 (예: 버그, 긴급)",
             supportingText = "5자 이내의 태그를 최대 5개까지 등록할 수 있습니다.",
+        )
+        ItemSelectionFormBox(
+            text = "상태 *",
+            { Text("To Do", modifier = Modifier.align(Alignment.Center)) },
+            { Text("In Progress", modifier = Modifier.align(Alignment.Center)) },
+            { Text("Done", modifier = Modifier.align(Alignment.Center)) },
+        )
+        ItemSelectionFormBox(
+            text = "담당자",
+            { Profile("다이노", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Profile("페임스", modifier = Modifier.align(Alignment.CenterStart)) },
         )
     }
 }
@@ -76,7 +88,7 @@ fun defaultTextField(text: String, hintText: String, supportingText: String?) {
 @Preview
 @Composable
 private fun newTaskFormPreview(widthDp: Dp = 672.dp, heightDp: Dp = 818.09.dp) {
-    newTaskForm()
+    NewTaskForm()
 }
 
 @Preview

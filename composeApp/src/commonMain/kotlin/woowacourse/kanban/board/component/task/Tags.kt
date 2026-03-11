@@ -48,7 +48,7 @@ fun TagBox(filteredTag: String, tagsModifier: Modifier = Modifier) {
         Text(
             text = filteredTag,
             fontSize = 12.sp,
-            color = CustomColor.TAG_TEXT.color,
+            color = CustomColor.DEFAULT_TEXT_COLOR.color,
         )
     }
 }
@@ -92,7 +92,7 @@ private fun TagBoxPreview(@PreviewParameter(TagBoxFilteredTagPreviewProvider::cl
         Text(
             text = filteredTag,
             fontSize = 12.sp,
-            color = CustomColor.TAG_TEXT.color,
+            color = CustomColor.DEFAULT_TEXT_COLOR.color,
         )
     }
 }

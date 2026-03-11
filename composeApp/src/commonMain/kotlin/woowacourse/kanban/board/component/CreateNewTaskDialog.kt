@@ -11,5 +11,6 @@ fun CreateNewTaskDialog() {
     Column {
         TopBar()
         HorizontalDivider()
+        NewTaskForm()
     }
 }
