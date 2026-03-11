@@ -54,6 +54,7 @@ fun NewTaskForm() {
             { Profile("다이노", modifier = Modifier.align(Alignment.CenterStart)) },
             { Profile("페임스", modifier = Modifier.align(Alignment.CenterStart)) },
         )
+
     }
 }
 
@@ -62,7 +63,7 @@ fun defaultTextField(text: String, hintText: String, supportingText: String?) {
     var value by remember { mutableStateOf("") }
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {
         Text(
             text = text,
@@ -76,7 +77,7 @@ fun defaultTextField(text: String, hintText: String, supportingText: String?) {
             textStyle = TextStyle(
                 color = CustomColor.GRAY_TEXT_COLOR.color,
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Medium,
             ),
             placeholder = { Text(hintText) },
             onValueChange = { value = it },

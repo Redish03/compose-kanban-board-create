@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 fun ItemSelectionFormBox(text: String, vararg createButton: @Composable BoxScope.() -> Unit) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {
         Text(text = text)
         Spacer(modifier = Modifier.height(8.dp))
