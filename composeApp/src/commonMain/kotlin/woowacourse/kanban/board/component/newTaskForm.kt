@@ -31,7 +31,7 @@ fun defaultTextField(text: String) {
         TextField(
             value = value,
             modifier = Modifier,
-            supportingText = { Text("태스크 제목을 입력하세요") },
+            placeholder = { Text("태스크 제목을 입력하세요") },
             onValueChange = { value = it },
         )
     }
