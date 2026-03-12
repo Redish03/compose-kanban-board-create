@@ -7,15 +7,23 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Error
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,12 +44,23 @@ fun NewTaskForm() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
-        defaultTextField(text = "제목 *", hintText = "태스크 제목을 입력하세요", supportingText = null)
-        defaultTextField(text = "설명", hintText = "테스크에 대한 자세한 설명을 입력하세요", supportingText = null)
-        defaultTextField(
+        DefaultTextField(
+            text = "제목 *",
+            hintText = "태스크 제목을 입력하세요",
+            supportingText = null,
+            { validateTitle(it) },
+        )
+        DefaultTextField(
+            text = "설명",
+            hintText = "테스크에 대한 자세한 설명을 입력하세요",
+            supportingText = null,
+            { validateTest(it) },
+        )
+        DefaultTextField(
             text = "태그",
             hintText = "태그를 쉼표로 구분하여 입력하세요 (예: 버그, 긴급)",
             supportingText = "5자 이내의 태그를 최대 5개까지 등록할 수 있습니다.",
+            validate = { validateTest(it) },
         )
         ItemSelectionFormBox(
             text = "상태 *",
@@ -59,8 +78,21 @@ fun NewTaskForm() {
 }
 
 @Composable
-fun defaultTextField(text: String, hintText: String, supportingText: String?) {
-    var value by remember { mutableStateOf("") }
+fun DefaultTextField(
+    text: String,
+    hintText: String,
+    supportingText: String?,
+    validate: (inputValue: String) -> Boolean,
+) {
+    var inputText by remember { mutableStateOf("") }
+    var isDirty by remember { mutableStateOf(false) }
+    val errorMessage = "Text input too long"
+
+    val isError by remember {
+        derivedStateOf {
+            validate(inputText)
+        }
+    }
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -71,31 +103,62 @@ fun defaultTextField(text: String, hintText: String, supportingText: String?) {
         )
         Spacer(modifier = Modifier.height(8.dp))
         TextField(
-            value = value,
+            value = inputText,
             modifier = Modifier
                 .fillMaxWidth(),
+//                .background(color = Color.White,), 해당 함수는 TextField 제외 뒷 배경과 아래의 supportingText까지 바꿈
             textStyle = TextStyle(
                 color = CustomColor.GRAY_TEXT_COLOR.color,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Medium,
             ),
+            colors = TextFieldDefaults.colors(
+                unfocusedContainerColor = Color.White,
+                errorTextColor = CustomColor.TEXT_INPUT_ERROR_BORDER_COLOR.color,
+                errorCursorColor = Color.Red,
+            ),
             placeholder = { Text(hintText) },
-            onValueChange = { value = it },
+            onValueChange = {
+                inputText = it
+                isDirty = true
+                validateTest(inputText)
+            },
+            isError = (isError && isDirty),
+            trailingIcon = {
+                if (isError && isDirty)
+                    Icon(Icons.Filled.Error, "error", tint = MaterialTheme.colorScheme.error)
+            },
             supportingText = { Text(supportingText ?: "") },
+            keyboardActions = KeyboardActions { validateTest(inputText) },
         )
     }
 }
 
+fun validateTest(value: String): Boolean {
+    val charLimit = 10
+    return value.length > charLimit
+}
+
+fun validateTitle(value: String): Boolean {
+    if (value.isNullOrEmpty()) return true
+    return false
+}
+
 @Preview
 @Composable
-private fun newTaskFormPreview(widthDp: Dp = 672.dp, heightDp: Dp = 818.09.dp) {
+private fun NewTaskFormPreview(widthDp: Dp = 672.dp, heightDp: Dp = 818.09.dp) {
     NewTaskForm()
 }
 
 @Preview
 @Composable
-fun defaultTextFieldPreview(@PreviewParameter(DefaultTextFieldParameterProvider::class) text: String) {
-    defaultTextField(text, "hint", null)
+fun DefaultTextFieldPreview(@PreviewParameter(DefaultTextFieldParameterProvider::class) text: String) {
+    DefaultTextField(
+        text,
+        "hint",
+        null,
+        { false },
+    )
 }
 
 private class DefaultTextFieldParameterProvider() : PreviewParameterProvider<String> {
