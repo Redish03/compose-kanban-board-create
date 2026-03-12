@@ -12,8 +12,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -50,20 +50,24 @@ fun NewTaskForm() {
         DefaultTextField(
             text = "제목 *",
             hintText = "태스크 제목을 입력하세요",
-            supportingText = null,
-            { validateTitle(it) },
+            defaultSupportingText = "",
+            validate = {
+                validateTitle(it)
+            },
         )
         DefaultTextField(
             text = "설명",
-            hintText = "테스크에 대한 자세한 설명을 입력하세요",
-            supportingText = null,
-            { validateTest(it) },
+            hintText = "태스크에 대한 자세한 설명을 입력하세요",
+            defaultSupportingText = null,
+            validate = { validateDescription(it) },
+            minLines = 4,
+            maxLines = 5,
         )
         DefaultTextField(
             text = "태그",
             hintText = "태그를 쉼표로 구분하여 입력하세요 (예: 버그, 긴급)",
-            supportingText = "5자 이내의 태그를 최대 5개까지 등록할 수 있습니다.",
-            validate = { validateTest(it) },
+            defaultSupportingText = "5자 이내의 태그를 최대 5개까지 등록할 수 있습니다.",
+            validate = { validateTagsAndWordCount(it) },
         )
         ItemSelectionFormBox(
             text = "상태 *",
@@ -83,7 +87,6 @@ fun NewTaskForm() {
             { Profile("다이노", modifier = Modifier.align(Alignment.CenterStart)) },
             { Profile("페임스", modifier = Modifier.align(Alignment.CenterStart)) },
         )
-
     }
 }
 
@@ -91,18 +94,17 @@ fun NewTaskForm() {
 fun DefaultTextField(
     text: String,
     hintText: String,
-    supportingText: String?,
-    validate: (inputValue: String) -> Boolean,
+    defaultSupportingText: String?,
+    validate: (inputValue: String) -> String?,
+    minLines: Int = 1,
+    maxLines: Int = 1,
 ) {
     var inputText by remember { mutableStateOf("") }
     var isDirty by remember { mutableStateOf(false) }
-    val errorMessage = "Text input too long"
 
-    val isError by remember {
-        derivedStateOf {
-            validate(inputText)
-        }
-    }
+    val errorMessage by remember { derivedStateOf { validate(inputText) } }
+    val isError = (errorMessage != null)
+
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -112,7 +114,7 @@ fun DefaultTextField(
             fontSize = 20.sp,
         )
         Spacer(modifier = Modifier.height(8.dp))
-        TextField(
+        OutlinedTextField(
             value = inputText,
             modifier = Modifier
                 .fillMaxWidth(),
@@ -133,30 +135,48 @@ fun DefaultTextField(
                 isDirty = true
                 validateTest(inputText)
             },
+            singleLine = false,
+            minLines = minLines,
+            maxLines = maxLines,
             isError = (isError && isDirty),
             trailingIcon = {
                 if (isError && isDirty)
                     Icon(Icons.Filled.Error, "error", tint = MaterialTheme.colorScheme.error)
             },
-            supportingText = { Text(supportingText ?: "") },
+            supportingText = {
+                if(isError && isDirty) Text(errorMessage ?: "") else (defaultSupportingText ?: "")
+            },
             keyboardActions = KeyboardActions { validateTest(inputText) },
         )
     }
 }
 
-fun validateTest(value: String): Boolean {
+fun validateTest(value: String): String? {
     val charLimit = 10
-    return value.length > charLimit
+    return "너 문제있어"
 }
 
-fun validateTitle(value: String): Boolean {
-    if (value.isNullOrEmpty()) return true
-    return false
+fun validateTitle(value: String?): String? {
+    if (value.isNullOrEmpty() || value.isBlank()) return "제목을 입력해 주세요."
+    return null
 }
 
-@Preview
+fun validateDescription(value: String): String? = null
+
+fun validateTagsAndWordCount(value: String): String? {
+    if (value.isBlank()) return null
+
+    val tags = value.trim().split(',')
+    if (tags.size !in 0..5) return "태그는 5자 이내로 5개까지만 등록할 수 있습니다."
+    tags.forEach { tag ->
+        if (tag.length !in 1..5) return "태그는 5자 이내로 5개까지만 등록할 수 있습니다."
+    }
+    return null
+}
+
+@Preview(widthDp = 672, heightDp = 1000)
 @Composable
-private fun NewTaskFormPreview(widthDp: Dp = 672.dp, heightDp: Dp = 818.09.dp) {
+private fun NewTaskFormPreview(widthDp: Dp = 672.dp, heightDp: Dp = 1000.dp) {
     NewTaskForm()
 }
 
@@ -167,7 +187,7 @@ fun DefaultTextFieldPreview(@PreviewParameter(DefaultTextFieldParameterProvider:
         text,
         "hint",
         null,
-        { false },
+        { "" },
     )
 }
 
