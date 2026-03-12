@@ -46,7 +46,7 @@ fun NewTaskForm(
     onStatusChange: (Int) -> Unit,
     selectedProfileIndex: Int,
     onProfileChange: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(24.dp),
