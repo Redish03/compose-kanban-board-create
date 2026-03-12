@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.component
+package woowacourse.kanban.board.component.newTaskCreate
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement

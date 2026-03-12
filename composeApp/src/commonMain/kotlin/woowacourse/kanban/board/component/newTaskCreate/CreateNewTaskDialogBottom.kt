@@ -1,6 +1,7 @@
-package woowacourse.kanban.board.component
+package woowacourse.kanban.board.component.newTaskCreate
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CreateNewTaskDialogBottom() {
+fun CreateNewTaskDialogBottom(isCreateEnabled: Boolean) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -31,6 +32,7 @@ fun CreateNewTaskDialogBottom() {
             text = "취소",
             textColor = Color.Black,
             backgroundColor = Color.White,
+            enabled = true,
             onClick = { },
         )
         Spacer(modifier = Modifier.width(12.dp))
@@ -38,16 +40,24 @@ fun CreateNewTaskDialogBottom() {
             text = "생성",
             textColor = Color.White,
             backgroundColor = Color.Unspecified,
+            enabled = isCreateEnabled,
             onClick = { },
         )
     }
 }
 
 @Composable
-fun BottomButton(text: String, textColor: Color, backgroundColor: Color, onClick: () -> Unit) {
+fun BottomButton(
+    text: String,
+    textColor: Color,
+    backgroundColor: Color,
+    enabled: Boolean,
+    onClick: () -> Unit,
+) {
     Button(
         onClick = { onClick() },
         shape = RoundedCornerShape(10.dp),
+        enabled = enabled,
         modifier = Modifier,
         colors = buttonColors(
             containerColor = backgroundColor,
@@ -68,16 +78,27 @@ fun BottomButton(text: String, textColor: Color, backgroundColor: Color, onClick
 @Preview
 @Composable
 private fun CreateNewTaskDialogBottomPreview() {
-    CreateNewTaskDialogBottom()
+    CreateNewTaskDialogBottom(true)
 }
 
 @Preview
 @Composable
 private fun BottomButtonPreview() {
-    BottomButton(
-        text = "생성",
-        textColor = Color.White,
-        backgroundColor = Color.Magenta,
-        onClick = { },
-    )
+    Column {
+        BottomButton(
+            text = "생성",
+            textColor = Color.White,
+            backgroundColor = Color.Magenta,
+            onClick = { },
+            enabled = true,
+        )
+
+        BottomButton(
+            text = "생성",
+            textColor = Color.White,
+            backgroundColor = Color.Magenta,
+            onClick = { },
+            enabled = false,
+        )
+    }
 }

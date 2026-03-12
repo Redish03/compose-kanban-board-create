@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.component
+package woowacourse.kanban.board.component.newTaskCreate
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -6,8 +6,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material3.Icon
@@ -16,7 +17,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,26 +29,34 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import woowacourse.kanban.board.CustomColor
 import woowacourse.kanban.board.component.task.Profile
 
 @Composable
-fun NewTaskForm() {
-    var selectedStatusIndex by remember { mutableStateOf(0) }
-    var selectedProfileIndex by remember { mutableStateOf(0) }
-
+fun NewTaskForm(
+    title: String,
+    onTitleChange: (String) -> Unit,
+    description: String,
+    onDescriptionChange: (String) -> Unit,
+    tags: String,
+    onTagsChange: (String) -> Unit,
+    selectedStatusIndex: Int,
+    onStatusChange: (Int) -> Unit,
+    selectedProfileIndex: Int,
+    onProfileChange: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Column(
-        modifier = Modifier
-            .size(672.dp, 654.dp)
-            .padding(24.dp),
+        modifier = modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
         DefaultTextField(
+            value = title,
             text = "제목 *",
+            onValueChange = onTitleChange,
             hintText = "태스크 제목을 입력하세요",
             defaultSupportingText = "",
             validate = {
@@ -56,7 +64,9 @@ fun NewTaskForm() {
             },
         )
         DefaultTextField(
+            value = description,
             text = "설명",
+            onValueChange = onDescriptionChange,
             hintText = "태스크에 대한 자세한 설명을 입력하세요",
             defaultSupportingText = null,
             validate = { validateDescription(it) },
@@ -64,26 +74,24 @@ fun NewTaskForm() {
             maxLines = 5,
         )
         DefaultTextField(
+            value = tags,
             text = "태그",
+            onValueChange = onTagsChange,
             hintText = "태그를 쉼표로 구분하여 입력하세요 (예: 버그, 긴급)",
             defaultSupportingText = "5자 이내의 태그를 최대 5개까지 등록할 수 있습니다.",
             validate = { validateTagsAndWordCount(it) },
         )
         ItemSelectionFormBox(
             text = "상태 *",
-            selectedStatusIndex,
-            onItemSelected = { index ->
-                selectedStatusIndex = index
-            },
+            selectedItemIndex = selectedStatusIndex,
+            onItemSelected = onStatusChange,
             { Text("To Do", modifier = Modifier.align(Alignment.Center)) },
             { Text("In Progress", modifier = Modifier.align(Alignment.Center)) },
             { Text("Done", modifier = Modifier.align(Alignment.Center)) },
         )
         ItemSelectionFormBox(
             text = "담당자 *", selectedProfileIndex,
-            onItemSelected = { index ->
-                selectedProfileIndex = index
-            },
+            onItemSelected = onProfileChange,
             { Profile("다이노", modifier = Modifier.align(Alignment.CenterStart)) },
             { Profile("페임스", modifier = Modifier.align(Alignment.CenterStart)) },
         )
@@ -92,17 +100,18 @@ fun NewTaskForm() {
 
 @Composable
 fun DefaultTextField(
+    value: String,
     text: String,
+    onValueChange: (String) -> Unit,
     hintText: String,
     defaultSupportingText: String?,
     validate: (inputValue: String) -> String?,
     minLines: Int = 1,
     maxLines: Int = 1,
 ) {
-    var inputText by remember { mutableStateOf("") }
     var isDirty by remember { mutableStateOf(false) }
 
-    val errorMessage by remember { derivedStateOf { validate(inputText) } }
+    val errorMessage = validate(value)
     val isError = (errorMessage != null)
 
     Column(
@@ -115,7 +124,7 @@ fun DefaultTextField(
         )
         Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
-            value = inputText,
+            value = value,
             modifier = Modifier
                 .fillMaxWidth(),
 //                .background(color = Color.White,), 해당 함수는 TextField 제외 뒷 배경과 아래의 supportingText까지 바꿈
@@ -131,9 +140,8 @@ fun DefaultTextField(
             ),
             placeholder = { Text(hintText) },
             onValueChange = {
-                inputText = it
+                onValueChange(it)
                 isDirty = true
-                validate(inputText)
             },
             singleLine = false,
             minLines = minLines,
@@ -146,7 +154,7 @@ fun DefaultTextField(
             supportingText = {
                 if (isError && isDirty) Text(errorMessage ?: "") else (defaultSupportingText ?: "")
             },
-            keyboardActions = KeyboardActions { validate(inputText) },
+            keyboardActions = KeyboardActions { validate(value) },
         )
     }
 }
@@ -161,19 +169,19 @@ fun validateDescription(value: String): String? = null
 fun validateTagsAndWordCount(value: String): String? {
     if (value.isBlank()) return null
 
-    val tags = value.trim().split(',')
+    val tags = value.split(',').map { it.trim() }
     if (tags.size !in 0..5) return "태그는 5자 이내로 5개까지만 등록할 수 있습니다."
     tags.forEach { tag ->
         if (tag.length !in 1..5) return "태그는 5자 이내로 5개까지만 등록할 수 있습니다."
     }
     return null
 }
-
-@Preview(widthDp = 672, heightDp = 1000)
-@Composable
-private fun NewTaskFormPreview(widthDp: Dp = 672.dp, heightDp: Dp = 1000.dp) {
-    NewTaskForm()
-}
+//
+//@Preview(widthDp = 672, heightDp = 1000)
+//@Composable
+//private fun NewTaskFormPreview(widthDp: Dp = 672.dp, heightDp: Dp = 1000.dp) {
+//    NewTaskForm()
+//}
 
 @Preview
 @Composable
@@ -181,8 +189,12 @@ fun DefaultTextFieldPreview(@PreviewParameter(DefaultTextFieldParameterProvider:
     DefaultTextField(
         text,
         "hint",
-        null,
-        { "" },
+        { null },
+        " ",
+        defaultSupportingText = "",
+        validate = { validateTitle("text") },
+        minLines = 1,
+        maxLines = 1,
     )
 }
 
