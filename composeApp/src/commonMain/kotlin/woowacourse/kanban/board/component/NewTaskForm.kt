@@ -37,6 +37,9 @@ import woowacourse.kanban.board.component.task.Profile
 
 @Composable
 fun NewTaskForm() {
+    var selectedStatusIndex by remember { mutableStateOf(0) }
+    var selectedProfileIndex by remember { mutableStateOf(0) }
+
     Column(
         modifier = Modifier
             .size(672.dp, 654.dp)
@@ -64,12 +67,19 @@ fun NewTaskForm() {
         )
         ItemSelectionFormBox(
             text = "상태 *",
+            selectedStatusIndex,
+            onItemSelected = { index ->
+                selectedStatusIndex = index
+            },
             { Text("To Do", modifier = Modifier.align(Alignment.Center)) },
             { Text("In Progress", modifier = Modifier.align(Alignment.Center)) },
             { Text("Done", modifier = Modifier.align(Alignment.Center)) },
         )
         ItemSelectionFormBox(
-            text = "담당자",
+            text = "담당자", selectedProfileIndex,
+            onItemSelected = { index ->
+                selectedProfileIndex = index
+            },
             { Profile("다이노", modifier = Modifier.align(Alignment.CenterStart)) },
             { Profile("페임스", modifier = Modifier.align(Alignment.CenterStart)) },
         )

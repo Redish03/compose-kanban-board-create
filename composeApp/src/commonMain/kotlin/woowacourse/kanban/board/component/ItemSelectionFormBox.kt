@@ -17,19 +17,29 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ItemSelectionFormBox(text: String, vararg createButton: @Composable BoxScope.() -> Unit) {
+fun ItemSelectionFormBox(
+    text: String,
+    selectedItemIndex: Int,
+    onItemSelected: (Int) -> Unit,
+    vararg createButton: @Composable BoxScope.() -> Unit,
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth(),
     ) {
         Text(text = text)
         Spacer(modifier = Modifier.height(8.dp))
+//        SingleChoiceSegmentedButtonRow(
         Row(
             modifier = Modifier.horizontalScroll(rememberScrollState()),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            createButton.forEach { element ->
-                DefaultSelectButton(content = element)
+            createButton.forEachIndexed { index, element ->
+                DefaultSelectButton(
+                    isSelected = (selectedItemIndex == index),
+                    onClick = { onItemSelected(index) },
+                    content = element,
+                )
             }
         }
     }
@@ -41,6 +51,8 @@ private fun ItemSelectionFormBoxPreview() {
     Column {
         ItemSelectionFormBox(
             "상태 *",
+            0,
+            { },
             { Text("Hello", modifier = Modifier.align(Alignment.CenterStart)) },
             { Text("Hello", modifier = Modifier.align(Alignment.CenterStart)) },
             { Text("Hello", modifier = Modifier.align(Alignment.CenterStart)) },

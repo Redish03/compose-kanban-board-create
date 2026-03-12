@@ -24,12 +24,12 @@ import woowacourse.kanban.board.component.task.Profile
 
 @Composable
 fun DefaultSelectButton(
+    isSelected: Boolean,
+    onClick: () -> Unit,
     content: @Composable BoxScope.() -> Unit,
 ) {
-    var isSelected by remember { mutableStateOf(false) }
-
     OutlinedButton(
-        onClick = { isSelected = !isSelected },
+        onClick = onClick,
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier.width(200.dp),
         colors = outlinedButtonColors(
@@ -55,10 +55,10 @@ fun DefaultSelectButton(
 @Composable
 fun DefaultSelectButtonPreview() {
     Column {
-        DefaultSelectButton({ Text("Hello", modifier = Modifier.align(Alignment.CenterStart)) })
-        DefaultSelectButton({ Text("조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘") })
-        DefaultSelectButton({ Text("To Do", modifier = Modifier.align(Alignment.Center)) })
-        DefaultSelectButton({ Text("In Progress") })
-        DefaultSelectButton({ Profile("조디악", Modifier.align(Alignment.CenterStart)) })
+        DefaultSelectButton(false, {}, { Text("Hello", modifier = Modifier.align(Alignment.CenterStart)) })
+        DefaultSelectButton(false, {}, { Text("조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘") })
+        DefaultSelectButton(false, {}, { Text("To Do", modifier = Modifier.align(Alignment.Center)) })
+        DefaultSelectButton(false, {}, { Text("In Progress") })
+        DefaultSelectButton(false, {}, { Profile("조디악", Modifier.align(Alignment.CenterStart)) })
     }
 }
