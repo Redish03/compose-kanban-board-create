@@ -80,7 +80,7 @@ fun NewTaskForm() {
             { Text("Done", modifier = Modifier.align(Alignment.Center)) },
         )
         ItemSelectionFormBox(
-            text = "담당자", selectedProfileIndex,
+            text = "담당자 *", selectedProfileIndex,
             onItemSelected = { index ->
                 selectedProfileIndex = index
             },
@@ -133,7 +133,7 @@ fun DefaultTextField(
             onValueChange = {
                 inputText = it
                 isDirty = true
-                validateTest(inputText)
+                validate(inputText)
             },
             singleLine = false,
             minLines = minLines,
@@ -144,16 +144,11 @@ fun DefaultTextField(
                     Icon(Icons.Filled.Error, "error", tint = MaterialTheme.colorScheme.error)
             },
             supportingText = {
-                if(isError && isDirty) Text(errorMessage ?: "") else (defaultSupportingText ?: "")
+                if (isError && isDirty) Text(errorMessage ?: "") else (defaultSupportingText ?: "")
             },
-            keyboardActions = KeyboardActions { validateTest(inputText) },
+            keyboardActions = KeyboardActions { validate(inputText) },
         )
     }
-}
-
-fun validateTest(value: String): String? {
-    val charLimit = 10
-    return "너 문제있어"
 }
 
 fun validateTitle(value: String?): String? {

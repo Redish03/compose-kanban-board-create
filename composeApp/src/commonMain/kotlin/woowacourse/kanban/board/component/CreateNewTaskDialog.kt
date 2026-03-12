@@ -9,7 +9,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-@Preview(heightDp = 1000)
 fun CreateNewTaskDialog() {
     Column {
         TopBar()
@@ -18,4 +17,10 @@ fun CreateNewTaskDialog() {
         HorizontalDivider(Modifier.padding(24.dp))
         CreateNewTaskDialogBottom()
     }
+}
+
+@Preview
+@Composable
+fun CreateNewTaskDialogPreview() {
+    CreateNewTaskDialog()
 }
