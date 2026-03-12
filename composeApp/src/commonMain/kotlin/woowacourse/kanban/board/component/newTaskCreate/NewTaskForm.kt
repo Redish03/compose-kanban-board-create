@@ -24,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -62,6 +63,7 @@ fun NewTaskForm(
             validate = {
                 validateTitle(it)
             },
+            modifier = Modifier.testTag("title_textField")
         )
         DefaultTextField(
             value = description,
@@ -101,6 +103,7 @@ fun NewTaskForm(
 @Composable
 fun DefaultTextField(
     value: String,
+    modifier: Modifier = Modifier,
     text: String,
     onValueChange: (String) -> Unit,
     hintText: String,
@@ -125,7 +128,7 @@ fun DefaultTextField(
         Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
             value = value,
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth(),
 //                .background(color = Color.White,), 해당 함수는 TextField 제외 뒷 배경과 아래의 supportingText까지 바꿈
             textStyle = TextStyle(
@@ -187,10 +190,10 @@ fun validateTagsAndWordCount(value: String): String? {
 @Composable
 fun DefaultTextFieldPreview(@PreviewParameter(DefaultTextFieldParameterProvider::class) text: String) {
     DefaultTextField(
-        text,
-        "hint",
-        { null },
-        " ",
+        value = text,
+        text = "hint",
+        onValueChange = { null },
+        hintText = " ",
         defaultSupportingText = "",
         validate = { validateTitle("text") },
         minLines = 1,
