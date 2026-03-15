@@ -42,31 +42,15 @@ fun Profile(nickname: String, modifier: Modifier = Modifier) {
     }
 }
 
-@Composable
 @Preview
+@Composable
 private fun ProfilePreview(@PreviewParameter(ProfilePreviewParameterProvider::class) nickname: String) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Image(
-            painter = painterResource(Res.drawable.profile),
-            contentDescription = "프로필 이미지",
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(
-            text = nickname,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Bold,
-            color = CustomColor.PROFILE_NICKNAME.color,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-        )
-    }
+    Profile(nickname)
 }
 
 private class ProfilePreviewParameterProvider() : PreviewParameterProvider<String> {
     override val values = sequenceOf<String>(
         "다이노",
-        "프로필",
-        "닉네임",
         "아주아주매우매우긴닉네임",
     )
 }

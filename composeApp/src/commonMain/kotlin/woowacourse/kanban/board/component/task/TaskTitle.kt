@@ -24,24 +24,16 @@ fun TaskTitle(title: String, modifier: Modifier = Modifier) {
     )
 }
 
-@Composable
 @Preview
-private fun TaskTitlePreview(@PreviewParameter(TaskTitlePreviewProvider::class) title: String, modifier: Modifier = Modifier) {
-    Text(
-        text = title,
-        modifier = modifier,
-        fontSize = 16.sp,
-        fontWeight = FontWeight.Bold,
-        color = CustomColor.TITLE.color,
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis,
-    )
+@Composable
+private fun TaskTitlePreview(@PreviewParameter(TaskTitlePreviewProvider::class) title: String) {
+    TaskTitle(title)
 }
 
 private class TaskTitlePreviewProvider : PreviewParameterProvider<String> {
     override val values = sequenceOf(
         "Alice",
         "너무너무긴이름은\n말줄임표로출력합니다.",
-        "Title",
+        "많이많이긴이름을프리뷰합니다",
     )
 }

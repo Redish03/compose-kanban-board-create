@@ -24,18 +24,10 @@ fun Script(script: String, modifier: Modifier = Modifier) {
     )
 }
 
-@Composable
 @Preview
-private fun ScriptPreview(@PreviewParameter(ScriptPreviewProvider::class) script: String?, modifier: Modifier = Modifier) {
-    if (script != null) Text(
-        text = script,
-        modifier = modifier,
-        fontSize = 14.sp,
-        fontWeight = FontWeight.Normal,
-        color = CustomColor.SCRIPT.color,
-        maxLines = 2,
-        overflow = TextOverflow.Ellipsis,
-    )
+@Composable
+private fun ScriptPreview(@PreviewParameter(ScriptPreviewProvider::class) script: String, modifier: Modifier = Modifier) {
+    Script(script, modifier = modifier)
 }
 
 private class ScriptPreviewProvider() : PreviewParameterProvider<String?> {

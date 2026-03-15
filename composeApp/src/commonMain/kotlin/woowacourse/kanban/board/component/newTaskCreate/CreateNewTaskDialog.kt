@@ -53,6 +53,6 @@ fun CreateNewTaskDialog() {
 
 @Preview
 @Composable
-fun CreateNewTaskDialogPreview() {
+private fun CreateNewTaskDialogPreview() {
     CreateNewTaskDialog()
 }

@@ -18,7 +18,6 @@ import kanbanboard.composeapp.generated.resources.cancel_button
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-@Preview
 fun TopBar() {
     Row(
         modifier = Modifier
@@ -42,4 +41,10 @@ fun TopBar() {
             modifier = Modifier.size(24.dp),
         )
     }
+}
+
+@Preview
+@Composable
+private fun TopBarPreview() {
+    TopBar()
 }

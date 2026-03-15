@@ -14,7 +14,6 @@ import woowacourse.kanban.board.component.newTaskCreate.CreateNewTaskDialog
 import woowacourse.kanban.board.data.Task
 
 @Composable
-@Preview(showBackground = true)
 fun App() {
     CreateNewTaskDialog()
 }

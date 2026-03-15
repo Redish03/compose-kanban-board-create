@@ -27,7 +27,7 @@ fun TaskBackground(generateTask: @Composable () -> Unit) {
 
 @Composable
 @Preview
-fun TaskBackgroundPreview() {
+private fun TaskBackgroundPreview() {
     val data = listOf(Task("조디악", nickname = "조디악"))
     TaskBackground { TaskUIMapper().createTaskUI(data) }
 }

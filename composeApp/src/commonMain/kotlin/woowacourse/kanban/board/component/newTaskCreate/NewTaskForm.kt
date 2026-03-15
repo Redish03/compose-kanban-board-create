@@ -63,7 +63,7 @@ fun NewTaskForm(
             validate = {
                 validateTitle(it)
             },
-            modifier = Modifier.testTag("title_textField")
+            modifier = Modifier.testTag("title_textField"),
         )
         DefaultTextField(
             value = description,
@@ -130,7 +130,6 @@ fun DefaultTextField(
             value = value,
             modifier = modifier
                 .fillMaxWidth(),
-//                .background(color = Color.White,), 해당 함수는 TextField 제외 뒷 배경과 아래의 supportingText까지 바꿈
             textStyle = TextStyle(
                 color = CustomColor.GRAY_TEXT_COLOR.color,
                 fontSize = 16.sp,
@@ -152,10 +151,14 @@ fun DefaultTextField(
             isError = (isError && isDirty),
             trailingIcon = {
                 if (isError && isDirty)
-                    Icon(Icons.Filled.Error, "error", tint = MaterialTheme.colorScheme.error)
+                    Icon(
+                        Icons.Filled.Error,
+                        "error",
+                        tint = MaterialTheme.colorScheme.error,
+                    )
             },
             supportingText = {
-                if (isError && isDirty) Text(errorMessage ?: "") else (defaultSupportingText ?: "")
+                if (isError && isDirty) Text(errorMessage) else Text(defaultSupportingText ?: "")
             },
             keyboardActions = KeyboardActions { validate(value) },
         )
@@ -179,16 +182,10 @@ fun validateTagsAndWordCount(value: String): String? {
     }
     return null
 }
-//
-//@Preview(widthDp = 672, heightDp = 1000)
-//@Composable
-//private fun NewTaskFormPreview(widthDp: Dp = 672.dp, heightDp: Dp = 1000.dp) {
-//    NewTaskForm()
-//}
 
 @Preview
 @Composable
-fun DefaultTextFieldPreview(@PreviewParameter(DefaultTextFieldParameterProvider::class) text: String) {
+private fun DefaultTextFieldPreview(@PreviewParameter(DefaultTextFieldParameterProvider::class) text: String) {
     DefaultTextField(
         value = text,
         text = "hint",

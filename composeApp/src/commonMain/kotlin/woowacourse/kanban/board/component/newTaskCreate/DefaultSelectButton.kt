@@ -49,7 +49,7 @@ fun DefaultSelectButton(
 
 @Preview
 @Composable
-fun DefaultSelectButtonPreview() {
+private fun DefaultSelectButtonPreview() {
     Column {
         DefaultSelectButton(false, {}, { Text("Hello", modifier = Modifier.align(Alignment.CenterStart)) })
         DefaultSelectButton(false, {}, { Text("조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘조디악사무엘") })
