@@ -8,11 +8,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import woowacourse.kanban.board.TaskUIMapper
+import woowacourse.kanban.board.component.task.TaskCard
 import woowacourse.kanban.board.data.Task
+import woowacourse.kanban.board.tasksExample
 
 @Composable
-fun TaskBackground(generateTask: @Composable () -> Unit) {
+fun TaskBackground(tasks: List<Task>) {
     FlowRow(
         modifier = Modifier
             .fillMaxSize()
@@ -21,7 +22,9 @@ fun TaskBackground(generateTask: @Composable () -> Unit) {
         horizontalArrangement = Arrangement.spacedBy(52.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
-        generateTask()
+        tasks.forEach { task ->
+            TaskCard(task.taskTitle, task.taskScript, task.tags, task.nickname)
+        }
     }
 }
 
@@ -29,5 +32,5 @@ fun TaskBackground(generateTask: @Composable () -> Unit) {
 @Preview
 private fun TaskBackgroundPreview() {
     val data = listOf(Task("조디악", nickname = "조디악"))
-    TaskBackground { TaskUIMapper().createTaskUI(data) }
+    TaskBackground(tasksExample)
 }
