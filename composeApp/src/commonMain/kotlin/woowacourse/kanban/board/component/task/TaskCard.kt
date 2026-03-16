@@ -40,7 +40,7 @@ fun TaskCard(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             TaskTitle(title)
-            if (script.isNotBlank()) Script(script, modifier = Modifier.testTag("script_area"))
+            if (script.isNotBlank()) TaskScript(script, modifier = Modifier.testTag("script_area"))
             if (tags.isNotEmpty()) Tags(tags, modifier = Modifier.fillMaxWidth().testTag("tags_area"))
             // 해당 부분에 로직이 들어가는게 맞을까?
             HorizontalDivider(

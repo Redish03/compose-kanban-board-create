@@ -12,7 +12,10 @@ import androidx.compose.ui.unit.sp
 import woowacourse.kanban.board.CustomColor
 
 @Composable
-fun Script(script: String, modifier: Modifier = Modifier) {
+fun TaskScript(
+    script: String,
+    modifier: Modifier = Modifier
+) {
     Text(
         text = script,
         modifier = modifier,
@@ -26,11 +29,11 @@ fun Script(script: String, modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-private fun ScriptPreview(@PreviewParameter(ScriptPreviewProvider::class) script: String, modifier: Modifier = Modifier) {
-    Script(script, modifier = modifier)
+private fun TaskScriptPreview(@PreviewParameter(TaskScriptPreviewProvider::class) script: String, modifier: Modifier = Modifier) {
+    TaskScript(script, modifier = modifier)
 }
 
-private class ScriptPreviewProvider() : PreviewParameterProvider<String?> {
+private class TaskScriptPreviewProvider() : PreviewParameterProvider<String?> {
     override val values = sequenceOf(
         "",
         "  ",
