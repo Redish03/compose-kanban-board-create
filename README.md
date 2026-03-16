@@ -49,3 +49,4 @@
     - [x] `TaskUIMapper` 객체 제거 및 TaskCard 생성 컴포저블 함수 추가
     - [x] 사용자 입력 검증 로직 분리
 - [ ] 불필요한 코드 제거
+- [ ] 스크롤 가능한 아이템들(Row의 Scrollable)에서 FlowRow로 변경

@@ -27,10 +27,12 @@ fun ItemSelectionFormBox(
     ) {
         Text(text = text)
         Spacer(modifier = Modifier.height(8.dp))
-//        SingleChoiceSegmentedButtonRow(
-        Row(
-            modifier = Modifier.horizontalScroll(rememberScrollState()),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+        FlowRow(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            maxItemsInEachRow = createButton.size
+            // maxItemsInEachRow는 디폴트 값이 Int의 MAX임
         ) {
             createButton.forEachIndexed { index, element ->
                 DefaultSelectButton(
@@ -56,5 +58,23 @@ private fun ItemSelectionFormBoxPreview() {
             { Text("btn3", modifier = Modifier.align(Alignment.CenterStart)) },
         )
         ItemSelectionFormBox("상태 *", 0, { }, { Text("Hello", modifier = Modifier.align(Alignment.Center)) })
+        ItemSelectionFormBox(
+            "상태 *",
+            0,
+            { },
+            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
+        )
     }
 }
