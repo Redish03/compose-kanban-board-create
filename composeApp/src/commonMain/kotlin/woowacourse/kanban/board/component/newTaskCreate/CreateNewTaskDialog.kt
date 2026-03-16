@@ -13,6 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import woowacourse.kanban.board.InputValidator
 
 @Composable
 fun CreateNewTaskDialog() {
@@ -24,7 +25,7 @@ fun CreateNewTaskDialog() {
 
     val isCreateEnabled by remember(title, tags) {
         derivedStateOf {
-            (validateTitle(title) == null) && (validateTagsAndWordCount(tags) == null)
+            (InputValidator.validateTitle(title) == null) && (InputValidator.validateTagsAndWordCount(tags) == null)
         }
     }
 
