@@ -37,9 +37,9 @@
     - [x] Preview 함수에 의미가 없는 케이스는 삭제하고, 의미있는 케이스를 남기기
 - [x] 객체의 API나 메서드 활용
 - [ ] 테스트 시나리오 추가
-    - [ ] 유효하지 않은 입력 검증 테스트
-        - [ ] 5글자 이상 또는 5개 이상의 태그를 입력한 경우 `IllegalArgumentException` 발생
-        - [ ] 제목이 비어있는 경우 `IllegalArgumentException`을 발생
+    - [x] 유효하지 않은 입력 검증 테스트
+        - [x] 5글자 이상 또는 5개 이상의 태그를 입력한 경우 `IllegalArgumentException` 발생
+        - [x] 제목이 비어있는 경우 `IllegalArgumentException`을 발생
     - [ ] 유효하지 않은 입력이 들어온 경우, 해당 TextField에 에러메세지를 띄운다
         - [ ] 5글자 이상 또는 5개 이상의 태그를 입력한 경우 에러메세지를 출력한다
         - [ ] 그 외 유효하지 않은 태그를 입력한 경우 에러메세지를 출력한다
@@ -47,5 +47,5 @@
 - [x] UI, 비즈니스 로직 분리
     - [x] `TaskUIMapper` 객체 제거 및 TaskCard 생성 컴포저블 함수 추가
     - [x] 사용자 입력 검증 로직 분리
-- [ ] 불필요한 코드 제거
-- [ ] 스크롤 가능한 아이템들(Row의 Scrollable)에서 FlowRow로 변경
+- [x] 불필요한 코드 제거
+- [x] 스크롤 가능한 아이템들(Row의 Scrollable)에서 FlowRow로 변경

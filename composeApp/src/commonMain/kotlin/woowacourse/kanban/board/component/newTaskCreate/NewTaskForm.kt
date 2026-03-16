@@ -82,6 +82,7 @@ fun NewTaskForm(
             hintText = "태그를 쉼표로 구분하여 입력하세요 (예: 버그, 긴급)",
             defaultSupportingText = "5자 이내의 태그를 최대 5개까지 등록할 수 있습니다.",
             validate = { InputValidator.validateTagsAndWordCount(it) },
+            modifier = Modifier.testTag("tag_textField")
         )
         ItemSelectionFormBox(
             text = "상태 *",

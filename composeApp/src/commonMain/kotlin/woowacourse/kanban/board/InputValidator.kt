@@ -7,6 +7,9 @@ object InputValidator {
     private const val MAX_TAG_LETTER_COUNT = 5
     private const val TAG_DELIMITER = ','
 
+    // Validator라면 Boolean 형으로 반환을 해야하지 않을까?
+    // 그렇다면 Task가 검증을 해야할텐데, 무턱대고 한다면 앱이 터질텐데?
+    // 어떻게 감싸줄 수 있을까?
     fun validateTitle(value: String?): String? {
         if (value.isNullOrEmpty() || value.isBlank()) return "제목을 입력해 주세요."
         return null

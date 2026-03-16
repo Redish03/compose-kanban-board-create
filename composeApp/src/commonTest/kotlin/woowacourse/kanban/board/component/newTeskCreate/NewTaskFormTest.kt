@@ -1,8 +1,7 @@
 package woowacourse.kanban.board.component.newTeskCreate
 
 import org.junit.Test
-import woowacourse.kanban.board.component.newTaskCreate.validateTagsAndWordCount
-import woowacourse.kanban.board.component.newTaskCreate.validateTitle
+import woowacourse.kanban.board.InputValidator
 import kotlin.test.assertEquals
 
 class NewTaskFormTest {
@@ -14,9 +13,9 @@ class NewTaskFormTest {
 
         val answerString = "제목을 입력해 주세요."
 
-        assertEquals(answerString, validateTitle(title1))
-        assertEquals(answerString, validateTitle(title2))
-        assertEquals(answerString, validateTitle(title3))
+        assertEquals(answerString, InputValidator.validateTitle(title1))
+        assertEquals(answerString, InputValidator.validateTitle(title2))
+        assertEquals(answerString, InputValidator.validateTitle(title3))
     }
 
     @Test
@@ -25,6 +24,6 @@ class NewTaskFormTest {
 
         val answerString = "태그는 5자 이내로 5개까지만 등록할 수 있습니다."
 
-        assertEquals(answerString, validateTagsAndWordCount(tags))
+        assertEquals(answerString, InputValidator.validateTagsAndWordCount(tags))
     }
 }
