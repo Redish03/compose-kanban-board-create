@@ -108,6 +108,7 @@ fun DefaultTextField(
     hintText: String,
     defaultSupportingText: String?,
     validate: (inputValue: String) -> String?,
+    modifier: Modifier = Modifier,
     minLines: Int = 1,
     maxLines: Int = 1,
 ) {
@@ -117,7 +118,7 @@ fun DefaultTextField(
     val isError = (errorMessage != null)
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
     ) {
         Text(
@@ -126,7 +127,7 @@ fun DefaultTextField(
         Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
             value = value,
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth(),
             textStyle = TextStyle(
                 color = CustomColor.GRAY_TEXT_COLOR.color,
