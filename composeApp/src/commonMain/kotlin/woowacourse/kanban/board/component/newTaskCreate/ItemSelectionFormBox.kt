@@ -1,14 +1,12 @@
 package woowacourse.kanban.board.component.newTaskCreate
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -53,9 +51,9 @@ private fun ItemSelectionFormBoxPreview() {
             "상태 *",
             0,
             { },
-            { Text("Hello", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("Hello", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("Hello", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Text("btn1", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Text("btn2", modifier = Modifier.align(Alignment.CenterStart)) },
+            { Text("btn3", modifier = Modifier.align(Alignment.CenterStart)) },
         )
         ItemSelectionFormBox("상태 *", 0, { }, { Text("Hello", modifier = Modifier.align(Alignment.Center)) })
     }

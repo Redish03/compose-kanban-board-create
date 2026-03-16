@@ -31,8 +31,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import woowacourse.kanban.board.CustomColor
+import woowacourse.kanban.board.InputValidator
 import woowacourse.kanban.board.component.task.Profile
 
 @Composable
@@ -103,7 +103,6 @@ fun NewTaskForm(
 @Composable
 fun DefaultTextField(
     value: String,
-    modifier: Modifier = Modifier,
     text: String,
     onValueChange: (String) -> Unit,
     hintText: String,
@@ -123,7 +122,6 @@ fun DefaultTextField(
     ) {
         Text(
             text = text,
-            fontSize = 20.sp,
         )
         Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
@@ -132,7 +130,6 @@ fun DefaultTextField(
                 .fillMaxWidth(),
             textStyle = TextStyle(
                 color = CustomColor.GRAY_TEXT_COLOR.color,
-                fontSize = 16.sp,
                 fontWeight = FontWeight.Medium,
             ),
             colors = TextFieldDefaults.colors(

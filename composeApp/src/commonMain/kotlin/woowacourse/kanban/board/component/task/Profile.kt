@@ -21,7 +21,10 @@ import org.jetbrains.compose.resources.painterResource
 import woowacourse.kanban.board.CustomColor
 
 @Composable
-fun Profile(nickname: String, modifier: Modifier = Modifier) {
+fun Profile(
+    nickname: String,
+    modifier: Modifier = Modifier,
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier,
@@ -48,7 +51,7 @@ private fun ProfilePreview(@PreviewParameter(ProfilePreviewParameterProvider::cl
     Profile(nickname)
 }
 
-private class ProfilePreviewParameterProvider() : PreviewParameterProvider<String> {
+private class ProfilePreviewParameterProvider : PreviewParameterProvider<String> {
     override val values = sequenceOf<String>(
         "다이노",
         "아주아주매우매우긴닉네임",

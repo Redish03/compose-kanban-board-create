@@ -2,6 +2,7 @@ package woowacourse.kanban.board.component.newTaskCreate
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -21,7 +22,7 @@ import org.jetbrains.compose.resources.painterResource
 fun TopBar() {
     Row(
         modifier = Modifier
-            .size(width = 672.dp, height = 85.dp)
+            .fillMaxWidth()
             .padding(24.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,

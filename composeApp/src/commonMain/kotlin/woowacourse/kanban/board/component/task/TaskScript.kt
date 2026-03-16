@@ -14,7 +14,7 @@ import woowacourse.kanban.board.CustomColor
 @Composable
 fun TaskScript(
     script: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Text(
         text = script,

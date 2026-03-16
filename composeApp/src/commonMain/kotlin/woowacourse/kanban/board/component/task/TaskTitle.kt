@@ -12,7 +12,10 @@ import androidx.compose.ui.unit.sp
 import woowacourse.kanban.board.CustomColor
 
 @Composable
-fun TaskTitle(title: String, modifier: Modifier = Modifier) {
+fun TaskTitle(
+    title: String,
+    modifier: Modifier = Modifier,
+) {
     Text(
         text = title,
         modifier = modifier,

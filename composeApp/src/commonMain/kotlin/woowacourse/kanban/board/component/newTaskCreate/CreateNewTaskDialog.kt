@@ -52,7 +52,7 @@ fun CreateNewTaskDialog() {
     }
 }
 
-@Preview
+@Preview(widthDp = 700)
 @Composable
 private fun CreateNewTaskDialogPreview() {
     CreateNewTaskDialog()

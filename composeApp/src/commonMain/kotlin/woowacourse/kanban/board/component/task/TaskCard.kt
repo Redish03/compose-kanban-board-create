@@ -59,6 +59,6 @@ private fun TaskCardPreview() {
         title = "title1",
         script = "",
         tags = emptyList(),
-        nickname = "사무엘"
+        nickname = "사무엘",
     )
 }

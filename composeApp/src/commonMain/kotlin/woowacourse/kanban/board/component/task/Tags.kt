@@ -20,7 +20,7 @@ import woowacourse.kanban.board.CustomColor
 @Composable
 fun Tags(
     tags: List<String>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     if (tags.isNotEmpty()) {
         FlowRow(
