@@ -61,7 +61,7 @@ fun NewTaskForm(
             hintText = "태스크 제목을 입력하세요",
             defaultSupportingText = "",
             validate = {
-                validateTitle(it)
+                InputValidator.validateTitle(it)
             },
             modifier = Modifier.testTag("title_textField"),
         )
@@ -71,7 +71,7 @@ fun NewTaskForm(
             onValueChange = onDescriptionChange,
             hintText = "태스크에 대한 자세한 설명을 입력하세요",
             defaultSupportingText = null,
-            validate = { validateDescription(it) },
+            validate = { InputValidator.validateDescription(it) },
             minLines = 4,
             maxLines = 5,
         )
@@ -81,7 +81,7 @@ fun NewTaskForm(
             onValueChange = onTagsChange,
             hintText = "태그를 쉼표로 구분하여 입력하세요 (예: 버그, 긴급)",
             defaultSupportingText = "5자 이내의 태그를 최대 5개까지 등록할 수 있습니다.",
-            validate = { validateTagsAndWordCount(it) },
+            validate = { InputValidator.validateTagsAndWordCount(it) },
         )
         ItemSelectionFormBox(
             text = "상태 *",
@@ -162,34 +162,16 @@ fun DefaultTextField(
     }
 }
 
-fun validateTitle(value: String?): String? {
-    if (value.isNullOrEmpty() || value.isBlank()) return "제목을 입력해 주세요."
-    return null
-}
-
-fun validateDescription(value: String): String? = null
-
-fun validateTagsAndWordCount(value: String): String? {
-    if (value.isBlank()) return null
-
-    val tags = value.split(',').map { it.trim() }
-    if (tags.size !in 0..5) return "태그는 5자 이내로 5개까지만 등록할 수 있습니다."
-    tags.forEach { tag ->
-        if (tag.length !in 1..5) return "태그는 5자 이내로 5개까지만 등록할 수 있습니다."
-    }
-    return null
-}
-
 @Preview
 @Composable
 private fun DefaultTextFieldPreview(@PreviewParameter(DefaultTextFieldParameterProvider::class) text: String) {
     DefaultTextField(
         value = text,
         text = "hint",
-        onValueChange = { null },
+        onValueChange = { InputValidator.validateTitle(it) },
         hintText = " ",
         defaultSupportingText = "",
-        validate = { validateTitle("text") },
+        validate = { InputValidator.validateTitle("text") },
         minLines = 1,
         maxLines = 1,
     )
