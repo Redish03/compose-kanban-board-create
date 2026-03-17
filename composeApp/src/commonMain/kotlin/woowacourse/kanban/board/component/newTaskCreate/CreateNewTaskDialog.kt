@@ -23,9 +23,13 @@ fun CreateNewTaskDialog() {
     var selectedStatusIndex by remember { mutableStateOf(0) }
     var selectedProfileIndex by remember { mutableStateOf(0) }
 
+    val statusOptions = listOf("To Do", "In Progress", "Done")
+    val profileOptions = listOf("다이노", "페임스")
+
     val isCreateEnabled by remember(title, tags) {
         derivedStateOf {
-            (InputValidator.validateTitle(title) == null) && (InputValidator.validateTagsAndWordCount(tags) == null)
+            (InputValidator.validateTitle(title) == null) &&
+                    (InputValidator.validateTagsAndWordCount(tags) == null)
         }
     }
 
@@ -40,7 +44,9 @@ fun CreateNewTaskDialog() {
             tags = tags,
             onTagsChange = { tags = it },
             selectedStatusIndex = selectedStatusIndex,
+            statusOptions = statusOptions,
             onStatusChange = { selectedStatusIndex = it },
+            profileOptions = profileOptions,
             selectedProfileIndex = selectedProfileIndex,
             onProfileChange = { selectedProfileIndex = it },
             modifier = Modifier.weight(1f),

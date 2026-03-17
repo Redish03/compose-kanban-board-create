@@ -31,6 +31,5 @@ fun TaskBackground(tasks: List<Task>) {
 @Composable
 @Preview
 private fun TaskBackgroundPreview() {
-    val data = listOf(Task("조디악", nickname = "조디악"))
     TaskBackground(tasksExample)
 }

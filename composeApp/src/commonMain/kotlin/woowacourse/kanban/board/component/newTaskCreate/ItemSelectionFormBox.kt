@@ -1,9 +1,9 @@
 package woowacourse.kanban.board.component.newTaskCreate
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,13 +13,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import woowacourse.kanban.board.component.task.Profile
 
 @Composable
 fun ItemSelectionFormBox(
     text: String,
-    selectedItemIndex: Int,
-    onItemSelected: (Int) -> Unit,
-    vararg createButton: @Composable BoxScope.() -> Unit,
+    content: @Composable () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -31,16 +30,9 @@ fun ItemSelectionFormBox(
             modifier = Modifier
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
-            maxItemsInEachRow = createButton.size
             // maxItemsInEachRow는 디폴트 값이 Int의 MAX임
         ) {
-            createButton.forEachIndexed { index, element ->
-                DefaultSelectButton(
-                    isSelected = (selectedItemIndex == index),
-                    onClick = { onItemSelected(index) },
-                    content = element,
-                )
-            }
+            content()
         }
     }
 }
@@ -48,33 +40,33 @@ fun ItemSelectionFormBox(
 @Preview(widthDp = 672)
 @Composable
 private fun ItemSelectionFormBoxPreview() {
-    Column {
-        ItemSelectionFormBox(
-            "상태 *",
-            0,
-            { },
-            { Text("btn1", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("btn2", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("btn3", modifier = Modifier.align(Alignment.CenterStart)) },
-        )
-        ItemSelectionFormBox("상태 *", 0, { }, { Text("Hello", modifier = Modifier.align(Alignment.Center)) })
-        ItemSelectionFormBox(
-            "상태 *",
-            0,
-            { },
-            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Text("MAX_TEST", modifier = Modifier.align(Alignment.CenterStart)) },
-        )
-    }
+    ItemSelectionFormBox(
+        text = "담당자",
+        content = {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                DefaultSelectButton(
+                    isSelected = true,
+                    onClick = {},
+                    content = {
+                        Profile(
+                            nickname = "다이노",
+                            modifier = Modifier.align(Alignment.Center),
+                        )
+                    },
+                )
+                DefaultSelectButton(
+                    isSelected = true,
+                    onClick = {},
+                    content = {
+                        Profile(
+                            nickname = "페임스",
+                            modifier = Modifier.align(Alignment.Center),
+                        )
+                    },
+                )
+            }
+        },
+    )
 }

@@ -44,8 +44,10 @@ fun NewTaskForm(
     tags: String,
     onTagsChange: (String) -> Unit,
     selectedStatusIndex: Int,
+    statusOptions: List<String>,
     onStatusChange: (Int) -> Unit,
     selectedProfileIndex: Int,
+    profileOptions: List<String>,
     onProfileChange: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -82,22 +84,35 @@ fun NewTaskForm(
             hintText = "태그를 쉼표로 구분하여 입력하세요 (예: 버그, 긴급)",
             defaultSupportingText = "5자 이내의 태그를 최대 5개까지 등록할 수 있습니다.",
             validate = { InputValidator.validateTagsAndWordCount(it) },
-            modifier = Modifier.testTag("tag_textField")
+            modifier = Modifier.testTag("tag_textField"),
         )
         ItemSelectionFormBox(
             text = "상태 *",
-            selectedItemIndex = selectedStatusIndex,
-            onItemSelected = onStatusChange,
-            { Text("To Do", modifier = Modifier.align(Alignment.Center)) },
-            { Text("In Progress", modifier = Modifier.align(Alignment.Center)) },
-            { Text("Done", modifier = Modifier.align(Alignment.Center)) },
-        )
+        ) {
+            statusOptions.forEachIndexed { index, status ->
+                DefaultSelectButton(
+                    isSelected = selectedStatusIndex == index,
+                    onClick = { onStatusChange(index) },
+                    content = { Text(status, modifier = Modifier.align(Alignment.Center)) },
+                )
+            }
+        }
         ItemSelectionFormBox(
-            text = "담당자 *", selectedProfileIndex,
-            onItemSelected = onProfileChange,
-            { Profile("다이노", modifier = Modifier.align(Alignment.CenterStart)) },
-            { Profile("페임스", modifier = Modifier.align(Alignment.CenterStart)) },
-        )
+            text = "담당자 *",
+        ) {
+            profileOptions.forEachIndexed { index, nickname ->
+                DefaultSelectButton(
+                    isSelected = selectedProfileIndex == index,
+                    onClick = { onProfileChange(index) },
+                    content = {
+                        Profile(
+                            nickname = nickname,
+                            modifier = Modifier.align(Alignment.Center),
+                        )
+                    },
+                )
+            }
+        }
     }
 }
 
