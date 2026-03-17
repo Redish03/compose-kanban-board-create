@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.InputValidator
 
 @Composable
-fun CreateNewTaskDialog() {
+fun CreateNewTaskScreen() {
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var tags by remember { mutableStateOf("") }
@@ -33,22 +33,55 @@ fun CreateNewTaskDialog() {
         }
     }
 
+    CreateNewTaskDialog(
+        title = title,
+        onTitleChange = { title = it },
+        description = description,
+        onDescriptionChange = { description = it },
+        tags = tags,
+        onTagsChange = { tags = it },
+        selectedStatusIndex = selectedStatusIndex,
+        statusOptions = statusOptions,
+        onStatusChange = { selectedStatusIndex = it },
+        selectedProfileIndex = selectedProfileIndex,
+        profileOptions = profileOptions,
+        onProfileChange = { selectedProfileIndex = it },
+        isCreateEnabled = isCreateEnabled,
+    )
+}
+
+@Composable
+fun CreateNewTaskDialog(
+    title: String,
+    onTitleChange: (String) -> Unit,
+    description: String,
+    onDescriptionChange: (String) -> Unit,
+    tags: String,
+    onTagsChange: (String) -> Unit,
+    selectedStatusIndex: Int,
+    statusOptions: List<String>,
+    onStatusChange: (Int) -> Unit,
+    selectedProfileIndex: Int,
+    profileOptions: List<String>,
+    onProfileChange: (Int) -> Unit,
+    isCreateEnabled: Boolean,
+) {
     Column {
         TopBar()
         HorizontalDivider()
         NewTaskForm(
             title = title,
-            onTitleChange = { title = it },
+            onTitleChange = onTitleChange,
             description = description,
-            onDescriptionChange = { description = it },
+            onDescriptionChange = onDescriptionChange,
             tags = tags,
-            onTagsChange = { tags = it },
+            onTagsChange = onTagsChange,
             selectedStatusIndex = selectedStatusIndex,
             statusOptions = statusOptions,
-            onStatusChange = { selectedStatusIndex = it },
+            onStatusChange = onStatusChange,
             profileOptions = profileOptions,
             selectedProfileIndex = selectedProfileIndex,
-            onProfileChange = { selectedProfileIndex = it },
+            onProfileChange = onProfileChange,
             modifier = Modifier.weight(1f),
         )
         HorizontalDivider(Modifier.padding(24.dp))
@@ -61,5 +94,19 @@ fun CreateNewTaskDialog() {
 @Preview(widthDp = 700)
 @Composable
 private fun CreateNewTaskDialogPreview() {
-    CreateNewTaskDialog()
+    CreateNewTaskDialog(
+        title = "제목제목",
+        onTitleChange = { },
+        description = "설명",
+        onDescriptionChange = { },
+        tags = "안녕,사무엘",
+        onTagsChange = { },
+        selectedStatusIndex = 0,
+        statusOptions = listOf("To Do", "In Progress", "Done"),
+        onStatusChange = { },
+        selectedProfileIndex = 0,
+        profileOptions = listOf("다이노", "페임스"),
+        onProfileChange = { },
+        isCreateEnabled = true,
+    )
 }

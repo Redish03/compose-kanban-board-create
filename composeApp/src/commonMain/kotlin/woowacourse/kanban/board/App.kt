@@ -8,14 +8,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.tooling.preview.Preview
 import woowacourse.kanban.board.component.TaskBackground
-import woowacourse.kanban.board.component.newTaskCreate.CreateNewTaskDialog
+import woowacourse.kanban.board.component.newTaskCreate.CreateNewTaskScreen
+import woowacourse.kanban.board.data.Script
+import woowacourse.kanban.board.data.Tags
 import woowacourse.kanban.board.data.Task
+import woowacourse.kanban.board.data.Title
+import woowacourse.kanban.board.data.Nickname
 
 @Composable
 fun App() {
-    CreateNewTaskDialog()
+    CreateNewTaskScreen()
 }
 
 @Composable

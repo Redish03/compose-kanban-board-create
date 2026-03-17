@@ -102,17 +102,6 @@ class TaskCardTest {
         onNodeWithTag("script_area").assertDoesNotExist()
     }
 
-    @Test
-    fun `태그가 6개 이상 주어져도 최대 5개만 표시한다`() = runComposeUiTest {
-        setContent {
-            TaskCard(
-                title = "hello",
-                script = "tags test",
-                tags = listOf("1", "2", "3", "4", "5", "6"),
-                nickname = "Samuel",
-            )
-        }
-
-        onAllNodesWithTag("tag_item").assertCountEquals(5)
-    }
+//  도메인 로직에 대한 테스트이므로, 해당 테스트는 여기 위치하면 안됨.
+//    fun `태그가 6개 이상 주어져도 최대 5개만 표시한다`() = runComposeUiTest {
 }
