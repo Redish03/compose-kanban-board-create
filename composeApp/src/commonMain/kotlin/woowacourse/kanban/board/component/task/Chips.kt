@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import woowacourse.kanban.board.CustomColor
 
 @Composable
-fun Tags(
+fun Chips(
     tags: List<String>,
     modifier: Modifier = Modifier,
 ) {
@@ -28,9 +28,9 @@ fun Tags(
             verticalArrangement = Arrangement.spacedBy(4.dp),
             modifier = modifier,
         ) {
-            tags.take(5).forEach { tag ->
-                TagBox(
-                    tag.take(5),
+            tags.forEach { tag ->
+                ChipBox(
+                    tag,
                     Modifier
                         .background(
                             color = CustomColor.TAG_BACKGROUND.color,
@@ -44,7 +44,7 @@ fun Tags(
 }
 
 @Composable
-fun TagBox(filteredTag: String, modifier: Modifier = Modifier) {
+fun ChipBox(filteredTag: String, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier,
     ) {
@@ -58,17 +58,17 @@ fun TagBox(filteredTag: String, modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-private fun TagsPreview(@PreviewParameter(TagsPreviewProvider::class) tags: List<String>, modifier: Modifier = Modifier) {
-    Tags(tags)
+private fun ChipsPreview(@PreviewParameter(ChipsPreviewProvider::class) tags: List<String>, modifier: Modifier = Modifier) {
+    Chips(tags)
 }
 
 @Preview
 @Composable
-private fun TagBoxPreview(@PreviewParameter(TagBoxFilteredTagPreviewProvider::class) filteredTag: String) {
-    TagBox(filteredTag)
+private fun ChipBoxPreview(@PreviewParameter(ChipBoxFilteredTagPreviewProvider::class) filteredTag: String) {
+    ChipBox(filteredTag)
 }
 
-private class TagsPreviewProvider : PreviewParameterProvider<List<String>?> {
+private class ChipsPreviewProvider : PreviewParameterProvider<List<String>?> {
     override val values = sequenceOf(
         listOf("tag1", "여러 자의 태그"),
         listOf("하나의 태그"),
@@ -76,7 +76,7 @@ private class TagsPreviewProvider : PreviewParameterProvider<List<String>?> {
     )
 }
 
-private class TagBoxFilteredTagPreviewProvider : PreviewParameterProvider<String> {
+private class ChipBoxFilteredTagPreviewProvider : PreviewParameterProvider<String> {
     override val values = sequenceOf<String>(
         "태그1",
         "태그 2",

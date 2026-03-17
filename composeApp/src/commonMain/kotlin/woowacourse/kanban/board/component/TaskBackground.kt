@@ -23,7 +23,12 @@ fun TaskBackground(tasks: List<Task>) {
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
         tasks.forEach { task ->
-            TaskCard(task.taskTitle, task.taskScript, task.tags, task.nickname)
+            TaskCard(
+                task.taskTitle.titleText,
+                task.taskScript.scriptText,
+                task.tags.tags,
+                task.nickname.nicknameText,
+            )
         }
     }
 }
