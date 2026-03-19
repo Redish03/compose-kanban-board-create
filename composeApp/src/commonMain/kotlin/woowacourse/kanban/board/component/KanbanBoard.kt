@@ -13,7 +13,7 @@ import woowacourse.kanban.board.data.Task
 import woowacourse.kanban.board.tasksExample
 
 @Composable
-fun TaskBackground(tasks: List<Task>) {
+fun KanbanBoard(tasks: List<Task>) {
     FlowRow(
         modifier = Modifier
             .fillMaxSize()
@@ -35,6 +35,6 @@ fun TaskBackground(tasks: List<Task>) {
 
 @Composable
 @Preview
-private fun TaskBackgroundPreview() {
-    TaskBackground(tasksExample)
+private fun KanbanBoardPreview() {
+    KanbanBoard(tasksExample)
 }
