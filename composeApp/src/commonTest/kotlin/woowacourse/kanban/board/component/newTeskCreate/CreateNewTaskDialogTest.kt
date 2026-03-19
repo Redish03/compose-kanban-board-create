@@ -17,8 +17,8 @@ import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
 import org.junit.Test
 import woowacourse.kanban.board.InputValidator
-import woowacourse.kanban.board.component.newTaskCreate.CreateNewTaskDialog
-import woowacourse.kanban.board.component.newTaskCreate.CreateNewTaskScreen
+import woowacourse.kanban.board.component.screen.CreateNewTaskDialog
+import woowacourse.kanban.board.component.screen.CreateNewTaskScreen
 
 @OptIn(ExperimentalTestApi::class)
 class CreateNewTaskDialogTest {

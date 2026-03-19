@@ -1,12 +1,7 @@
 package woowacourse.kanban.board
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import woowacourse.kanban.board.component.TaskBackground
-import woowacourse.kanban.board.component.newTaskCreate.CreateNewTaskScreen
+import woowacourse.kanban.board.component.screen.CreateNewTaskScreen
 import woowacourse.kanban.board.data.Script
 import woowacourse.kanban.board.data.Tags
 import woowacourse.kanban.board.data.Task
@@ -17,31 +12,6 @@ import woowacourse.kanban.board.data.TaskStatus
 @Composable
 fun App() {
     CreateNewTaskScreen()
-}
-
-@Composable
-fun MainScreen() {
-    TaskBackground(tasksExample)
-}
-
-@Composable
-fun CheckerScreen() {
-    var checked by remember { mutableStateOf(true) }
-
-    CheckerView(checked = checked) {
-        checked = !checked
-    }
-}
-
-@Composable
-fun CheckerView(checked: Boolean, check: () -> Unit) {
-    Column {
-        Checkbox(
-            checked = checked,
-            onCheckedChange = { check() },
-        )
-        if (checked) Text(text = "체크됨!")
-    }
 }
 
 val tasksExample = listOf<Task>(

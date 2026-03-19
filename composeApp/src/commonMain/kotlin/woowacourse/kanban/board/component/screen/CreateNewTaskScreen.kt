@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.component.newTaskCreate
+package woowacourse.kanban.board.component.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.InputValidator
+import woowacourse.kanban.board.component.newTaskCreate.CreateNewTaskDialogBottom
+import woowacourse.kanban.board.component.newTaskCreate.NewTaskForm
+import woowacourse.kanban.board.component.newTaskCreate.TopBar
 
 @Composable
 fun CreateNewTaskScreen() {
