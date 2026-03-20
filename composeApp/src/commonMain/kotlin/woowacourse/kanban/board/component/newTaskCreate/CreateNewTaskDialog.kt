@@ -24,8 +24,11 @@ fun CreateNewTaskDialog(
     profileOptions: List<String>,
     onProfileChange: (Int) -> Unit,
     isCreateEnabled: Boolean,
+    modifier: Modifier = Modifier,
 ) {
-    Column {
+    Column(
+        modifier = modifier,
+    ) {
         TopBar()
         HorizontalDivider()
         NewTaskForm(

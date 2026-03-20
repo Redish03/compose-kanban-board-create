@@ -11,7 +11,6 @@ import woowacourse.kanban.board.data.Title
 
 @Composable
 fun App() {
-//    CreateNewTaskScreen()
     KanbanBoardScreen()
 }
 

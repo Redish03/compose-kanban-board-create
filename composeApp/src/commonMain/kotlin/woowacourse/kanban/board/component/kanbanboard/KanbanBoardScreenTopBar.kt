@@ -30,7 +30,7 @@ import org.jetbrains.compose.resources.painterResource
 import woowacourse.kanban.board.CustomColor
 
 @Composable
-fun KanbanBoardScreenTopBar() {
+fun KanbanBoardScreenTopBar(onClickCreateNewTaskButton: () -> Unit) {
     Column {
         Row(
             modifier = Modifier
@@ -40,7 +40,7 @@ fun KanbanBoardScreenTopBar() {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             KanbanBoardTopBarTitle()
-            CreateNewTaskButton()
+            CreateNewTaskButton(onClickCreateNewTaskButton)
         }
         TaskProgressBar()
     }
@@ -63,9 +63,9 @@ fun KanbanBoardTopBarTitle() {
 }
 
 @Composable
-fun CreateNewTaskButton() {
+fun CreateNewTaskButton(onClickCreateNewTaskButton: () -> Unit) {
     Button(
-        onClick = { /* 새로운 태스크 생성 */ },
+        onClick = onClickCreateNewTaskButton,
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier,
         colors = ButtonColors(
@@ -101,7 +101,9 @@ fun TaskProgressBar(/* 퍼센트 및 완료율 포함되어야함 */) {
 @Preview
 @Composable
 private fun KanbanBoardScreenTopBarPreview() {
-    KanbanBoardScreenTopBar()
+    KanbanBoardScreenTopBar(
+        onClickCreateNewTaskButton = { },
+    )
 }
 
 @Preview
@@ -113,7 +115,9 @@ private fun KanbanBoardTopBarTitlePreview() {
 @Preview
 @Composable
 private fun CreateNewTaskButtonPreview() {
-    CreateNewTaskButton()
+    CreateNewTaskButton(
+        onClickCreateNewTaskButton = {  },
+    )
 }
 
 @Preview

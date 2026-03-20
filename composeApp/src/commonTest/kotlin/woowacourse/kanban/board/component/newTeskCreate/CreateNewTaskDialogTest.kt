@@ -17,15 +17,33 @@ import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
 import org.junit.Test
 import woowacourse.kanban.board.InputValidator
-import woowacourse.kanban.board.component.screen.CreateNewTaskDialog
-import woowacourse.kanban.board.component.screen.CreateNewTaskScreen
+import woowacourse.kanban.board.component.newTaskCreate.CreateNewTaskDialog
 
 @OptIn(ExperimentalTestApi::class)
 class CreateNewTaskDialogTest {
     @Test
     fun `제목이 비어있으면 생성 버튼이 비활성화 된다`() = runComposeUiTest {
         setContent {
-            CreateNewTaskScreen()
+            var title by remember { mutableStateOf("") }
+            var description by remember { mutableStateOf("") }
+            var tags by remember { mutableStateOf("") }
+
+            CreateNewTaskDialog(
+                title = title,
+                onTitleChange = { title = it },
+                description = description,
+                onDescriptionChange = { description = it },
+                tags = tags,
+                onTagsChange = { tags = it },
+                selectedStatusIndex = 0,
+                statusOptions = listOf("1"),
+                onStatusChange = { },
+                selectedProfileIndex = 0,
+                profileOptions = listOf("1"),
+                onProfileChange = { },
+                isCreateEnabled = (InputValidator.validateTitle(title) == null) &&
+                        (InputValidator.validateTagsAndWordCount(tags) == null),
+            )
         }
 
         onNodeWithText("생성").assertIsNotEnabled()
@@ -34,7 +52,26 @@ class CreateNewTaskDialogTest {
     @Test
     fun `제목에 공백이 주어지면 생성 버튼이 비활성화 된다`() = runComposeUiTest {
         setContent {
-            CreateNewTaskScreen()
+            var title by remember { mutableStateOf("") }
+            var description by remember { mutableStateOf("") }
+            var tags by remember { mutableStateOf("") }
+
+            CreateNewTaskDialog(
+                title = title,
+                onTitleChange = { title = it },
+                description = description,
+                onDescriptionChange = { description = it },
+                tags = tags,
+                onTagsChange = { tags = it },
+                selectedStatusIndex = 0,
+                statusOptions = listOf("1"),
+                onStatusChange = { },
+                selectedProfileIndex = 0,
+                profileOptions = listOf("1"),
+                onProfileChange = { },
+                isCreateEnabled = (InputValidator.validateTitle(title) == null) &&
+                        (InputValidator.validateTagsAndWordCount(tags) == null),
+            )
         }
 
         onNode(hasSetTextAction() and hasAnyAncestor(hasTestTag("title_textField")))
@@ -49,7 +86,26 @@ class CreateNewTaskDialogTest {
     @Test
     fun `제목이 있다면 생성 버튼이 활성화 된다`() = runComposeUiTest {
         setContent {
-            CreateNewTaskScreen()
+            var title by remember { mutableStateOf("") }
+            var description by remember { mutableStateOf("") }
+            var tags by remember { mutableStateOf("") }
+
+            CreateNewTaskDialog(
+                title = title,
+                onTitleChange = { title = it },
+                description = description,
+                onDescriptionChange = { description = it },
+                tags = tags,
+                onTagsChange = { tags = it },
+                selectedStatusIndex = 0,
+                statusOptions = listOf("1"),
+                onStatusChange = { },
+                selectedProfileIndex = 0,
+                profileOptions = listOf("1"),
+                onProfileChange = { },
+                isCreateEnabled = (InputValidator.validateTitle(title) == null) &&
+                        (InputValidator.validateTagsAndWordCount(tags) == null),
+            )
         }
 
         onNode(hasSetTextAction() and hasAnyAncestor(hasTestTag("title_textField")))
@@ -60,7 +116,26 @@ class CreateNewTaskDialogTest {
     @Test
     fun `제목이 있어도 태그에 유효하지 않은 값이 입력되면 버튼이 비활성화 된다`() = runComposeUiTest {
         setContent {
-            CreateNewTaskScreen()
+            var title by remember { mutableStateOf("") }
+            var description by remember { mutableStateOf("") }
+            var tags by remember { mutableStateOf("") }
+
+            CreateNewTaskDialog(
+                title = title,
+                onTitleChange = { title = it },
+                description = description,
+                onDescriptionChange = { description = it },
+                tags = tags,
+                onTagsChange = { tags = it },
+                selectedStatusIndex = 0,
+                statusOptions = listOf("1"),
+                onStatusChange = { },
+                selectedProfileIndex = 0,
+                profileOptions = listOf("1"),
+                onProfileChange = { },
+                isCreateEnabled = (InputValidator.validateTitle(title) == null) &&
+                        (InputValidator.validateTagsAndWordCount(tags) == null),
+            )
         }
 
         onNode(hasSetTextAction() and hasAnyAncestor(hasTestTag("title_textField")))
@@ -73,7 +148,26 @@ class CreateNewTaskDialogTest {
     @Test
     fun `태그를 5개 초과하여 등록하려 하면 에러메세지를 띄운다`() = runComposeUiTest {
         setContent {
-            CreateNewTaskScreen()
+            var title by remember { mutableStateOf("") }
+            var description by remember { mutableStateOf("") }
+            var tags by remember { mutableStateOf("") }
+
+            CreateNewTaskDialog(
+                title = title,
+                onTitleChange = { title = it },
+                description = description,
+                onDescriptionChange = { description = it },
+                tags = tags,
+                onTagsChange = { tags = it },
+                selectedStatusIndex = 0,
+                statusOptions = listOf("1"),
+                onStatusChange = { },
+                selectedProfileIndex = 0,
+                profileOptions = listOf("1"),
+                onProfileChange = { },
+                isCreateEnabled = (InputValidator.validateTitle(title) == null) &&
+                        (InputValidator.validateTagsAndWordCount(tags) == null),
+            )
         }
         val input = "test1, test2, test3, test4, test5, test6"
 
@@ -87,7 +181,26 @@ class CreateNewTaskDialogTest {
     @Test
     fun `형식에 맞지 않는 태그를 입력 시 에러메세지를 띄운다`() = runComposeUiTest {
         setContent {
-            CreateNewTaskScreen()
+            var title by remember { mutableStateOf("") }
+            var description by remember { mutableStateOf("") }
+            var tags by remember { mutableStateOf("") }
+
+            CreateNewTaskDialog(
+                title = title,
+                onTitleChange = { title = it },
+                description = description,
+                onDescriptionChange = { description = it },
+                tags = tags,
+                onTagsChange = { tags = it },
+                selectedStatusIndex = 0,
+                statusOptions = listOf("1"),
+                onStatusChange = { },
+                selectedProfileIndex = 0,
+                profileOptions = listOf("1"),
+                onProfileChange = { },
+                isCreateEnabled = (InputValidator.validateTitle(title) == null) &&
+                        (InputValidator.validateTagsAndWordCount(tags) == null),
+            )
         }
         val input = "test1, test2,"
 
