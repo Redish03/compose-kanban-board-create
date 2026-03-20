@@ -1,17 +1,18 @@
 package woowacourse.kanban.board
 
 import androidx.compose.runtime.Composable
-import woowacourse.kanban.board.component.screen.CreateNewTaskScreen
+import woowacourse.kanban.board.component.screen.KanbanBoardScreen
+import woowacourse.kanban.board.data.Nickname
 import woowacourse.kanban.board.data.Script
 import woowacourse.kanban.board.data.Tags
 import woowacourse.kanban.board.data.Task
-import woowacourse.kanban.board.data.Title
-import woowacourse.kanban.board.data.Nickname
 import woowacourse.kanban.board.data.TaskStatus
+import woowacourse.kanban.board.data.Title
 
 @Composable
 fun App() {
-    CreateNewTaskScreen()
+//    CreateNewTaskScreen()
+    KanbanBoardScreen()
 }
 
 val tasksExample = listOf<Task>(
@@ -31,12 +32,12 @@ val tasksExample = listOf<Task>(
     Task(
         taskTitle = Title("LazyColumn 컴포넌트 구현"),
         taskScript = Script("세로 스크롤 가능한 리스트 컴포넌트를 만들고 성능 최적화를 적용합니다."),
-        status = TaskStatus.TO_DO,
+        status = TaskStatus.IN_PROGRESS,
         nickname = Nickname("다이노"),
     ),
     Task(
         taskTitle = Title("LazyColumn 컴포넌트 구현"),
-        status = TaskStatus.TO_DO,
+        status = TaskStatus.DONE,
         nickname = Nickname("다이노"),
     ),
     Task(
