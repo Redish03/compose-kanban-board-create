@@ -34,7 +34,6 @@ fun TopBar() {
             ),
             fontWeight = FontWeight.SemiBold,
             fontSize = 20.sp,
-
             )
         Icon(
             painter = painterResource(Res.drawable.cancel_button),
