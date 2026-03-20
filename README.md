@@ -2,11 +2,11 @@
 
 ## 기능 구현 사항(step2)
 
-- [ ] 할 일의 상태를 추적, 관리한다. (To Do, In Progress, Done)
+- [x] 할 일의 상태를 추적, 관리한다. (To Do, In Progress, Done)
 - [x] 새 태스크 생성 버튼을 클릭하면 모달(`CreateNewTaskScreen`)을 띄운다.
 - [x] 각 상태별 태스크 개수를 트래킹한다.
 - [x] 상태(To-Do, In Progress, Done)별 태스크 개수가 노출된다.
-- [ ] 전체 할 일 중 완료된 일의 비율을 계산 한다.
+- [x] 전체 할 일 중 완료된 일의 비율을 계산 한다.
 - [x] `CardHolder`를 스크롤이 가능하도록 구현한다.
 
 ### 새 태스크 생성

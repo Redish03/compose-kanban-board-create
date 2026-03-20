@@ -1,5 +1,7 @@
 package woowacourse.kanban.board.data
 
+import kotlin.math.*
+
 class Tasks(private val tasks: MutableList<Task>) {
     fun addNewTask(
         title: String,
@@ -19,10 +21,22 @@ class Tasks(private val tasks: MutableList<Task>) {
         )
     }
 
+    fun calculateDoneTasksRatio(): Double {
+        val doneTasks = tasks.count { it.status == TaskStatus.DONE }
+        val totalTasks = tasks.size
+
+        if(totalTasks == 0) return 0.0
+        return round((doneTasks.toDouble() / totalTasks.toDouble()) * 100)
+    }
+
+    fun tasksSize() = tasks.size
+    fun doneTasksSize() = tasks.count { it.status == TaskStatus.DONE }
+
     fun todoStatusTasks(): List<Task> = tasks.filter { it.status == TaskStatus.TO_DO }
     fun inProgressStatusTasks(): List<Task> = tasks.filter { it.status == TaskStatus.IN_PROGRESS }
     fun doneStatusTasks(): List<Task> = tasks.filter { it.status == TaskStatus.DONE }
-    fun splitTags(tags: String): List<String> = if (tags.isBlank()) {
+
+    private fun splitTags(tags: String): List<String> = if (tags.isBlank()) {
         emptyList()
     } else {
         tags.split(',').map { it.trim() }.filter { it.isNotBlank() }

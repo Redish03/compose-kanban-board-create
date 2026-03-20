@@ -102,7 +102,10 @@ fun KanbanBoardScreen() {
         verticalArrangement = Arrangement.Top,
     ) {
         KanbanBoardScreenTopBar(
-            { isCreatingNewTask = true },
+            tasksCount =tasks.tasksSize(),
+            completeCount = tasks.doneTasksSize(),
+            completeRate = tasks.calculateDoneTasksRatio(),
+            onClickCreateNewTaskButton = { isCreatingNewTask = true },
         )
         KanbanBoard(
             tasks = tasks,

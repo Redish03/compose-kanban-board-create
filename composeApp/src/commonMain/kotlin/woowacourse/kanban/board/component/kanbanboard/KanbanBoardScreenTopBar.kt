@@ -30,7 +30,12 @@ import org.jetbrains.compose.resources.painterResource
 import woowacourse.kanban.board.CustomColor
 
 @Composable
-fun KanbanBoardScreenTopBar(onClickCreateNewTaskButton: () -> Unit) {
+fun KanbanBoardScreenTopBar(
+    tasksCount: Int,
+    completeCount: Int,
+    completeRate: Double = 0.0,
+    onClickCreateNewTaskButton: () -> Unit
+) {
     Column {
         Row(
             modifier = Modifier
@@ -39,15 +44,25 @@ fun KanbanBoardScreenTopBar(onClickCreateNewTaskButton: () -> Unit) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            KanbanBoardTopBarTitle()
-            CreateNewTaskButton(onClickCreateNewTaskButton)
+            KanbanBoardTopBarTitle(
+                tasksCount,
+                completeCount,
+                completeRate,
+            )
+            CreateNewTaskButton(
+                onClickCreateNewTaskButton,
+            )
         }
-        TaskProgressBar()
+        TaskProgressBar(completeRate)
     }
 }
 
 @Composable
-fun KanbanBoardTopBarTitle() {
+fun KanbanBoardTopBarTitle(
+    tasksCount: Int,
+    completeCount: Int,
+    completeRate: Double,
+) {
     Column {
         Text(
             text = "Compose Desktop 칸반 보드",
@@ -55,7 +70,7 @@ fun KanbanBoardTopBarTitle() {
             fontWeight = FontWeight.SemiBold,
         )
         Text(
-            text = "완료율: 50% (3/6)",
+            text = "완료율: ${completeRate.toInt()}% (${completeCount}/${tasksCount}})",
             color = Color.Gray,
             fontSize = 9.sp,
         )
@@ -86,8 +101,8 @@ fun CreateNewTaskButton(onClickCreateNewTaskButton: () -> Unit) {
 }
 
 @Composable
-fun TaskProgressBar(/* 퍼센트 및 완료율 포함되어야함 */) {
-    var currentProgress by remember { mutableStateOf(0.7f) }
+fun TaskProgressBar(completeRate: Double) {
+    var currentProgress by remember { mutableStateOf(completeRate.toFloat()) }
     LinearProgressIndicator(
         progress = { currentProgress },
         modifier = Modifier.fillMaxWidth(),
@@ -103,25 +118,32 @@ fun TaskProgressBar(/* 퍼센트 및 완료율 포함되어야함 */) {
 private fun KanbanBoardScreenTopBarPreview() {
     KanbanBoardScreenTopBar(
         onClickCreateNewTaskButton = { },
+        tasksCount = 5,
+        completeCount = 3,
+        completeRate = 60.0,
     )
 }
 
 @Preview
 @Composable
 private fun KanbanBoardTopBarTitlePreview() {
-    KanbanBoardTopBarTitle()
+    KanbanBoardTopBarTitle(
+        completeCount = 5,
+        completeRate = 50.0,
+        tasksCount = 10,
+    )
 }
 
 @Preview
 @Composable
 private fun CreateNewTaskButtonPreview() {
     CreateNewTaskButton(
-        onClickCreateNewTaskButton = {  },
+        onClickCreateNewTaskButton = { },
     )
 }
 
 @Preview
 @Composable
 private fun TaskProgressBarPreview() {
-    TaskProgressBar()
+    TaskProgressBar(0.7)
 }
