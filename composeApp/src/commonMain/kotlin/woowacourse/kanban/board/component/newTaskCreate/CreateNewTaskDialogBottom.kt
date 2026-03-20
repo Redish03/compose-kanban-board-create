@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CreateNewTaskDialogBottom(isCreateEnabled: Boolean) {
+fun CreateNewTaskDialogBottom(onClickCloseButton: () -> Unit, isCreateEnabled: Boolean) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -33,7 +33,7 @@ fun CreateNewTaskDialogBottom(isCreateEnabled: Boolean) {
             textColor = Color.Black,
             backgroundColor = Color.White,
             enabled = true,
-            onClick = { },
+            onClick = onClickCloseButton,
         )
         Spacer(modifier = Modifier.width(12.dp))
         BottomButton(
@@ -78,7 +78,7 @@ fun BottomButton(
 @Preview
 @Composable
 private fun CreateNewTaskDialogBottomPreview() {
-    CreateNewTaskDialogBottom(true)
+    CreateNewTaskDialogBottom({ }, true)
 }
 
 @Preview

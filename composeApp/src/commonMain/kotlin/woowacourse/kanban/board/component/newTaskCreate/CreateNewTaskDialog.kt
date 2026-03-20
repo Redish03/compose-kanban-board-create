@@ -51,7 +51,10 @@ fun CreateNewTaskDialog(
         )
         HorizontalDivider(Modifier.padding(24.dp))
         Box(modifier = Modifier.padding(vertical = 16.dp)) {
-            CreateNewTaskDialogBottom(isCreateEnabled = isCreateEnabled)
+            CreateNewTaskDialogBottom(
+                onClickCloseButton = onClickCloseButton,
+                isCreateEnabled = isCreateEnabled
+            )
         }
     }
 }
