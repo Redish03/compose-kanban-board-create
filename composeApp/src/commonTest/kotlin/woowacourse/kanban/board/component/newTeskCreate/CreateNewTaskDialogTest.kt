@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
@@ -43,6 +44,9 @@ class CreateNewTaskDialogTest {
                 onProfileChange = { },
                 isCreateEnabled = (InputValidator.validateTitle(title) == null) &&
                         (InputValidator.validateTagsAndWordCount(tags) == null),
+                onClickCreateButton = { },
+                onClickCloseButton = { },
+                modifier = Modifier,
             )
         }
 
@@ -71,6 +75,9 @@ class CreateNewTaskDialogTest {
                 onProfileChange = { },
                 isCreateEnabled = (InputValidator.validateTitle(title) == null) &&
                         (InputValidator.validateTagsAndWordCount(tags) == null),
+                onClickCreateButton = { },
+                onClickCloseButton = { },
+                modifier = Modifier,
             )
         }
 
@@ -105,6 +112,9 @@ class CreateNewTaskDialogTest {
                 onProfileChange = { },
                 isCreateEnabled = (InputValidator.validateTitle(title) == null) &&
                         (InputValidator.validateTagsAndWordCount(tags) == null),
+                onClickCreateButton = { },
+                onClickCloseButton = { },
+                modifier = Modifier,
             )
         }
 
@@ -135,6 +145,9 @@ class CreateNewTaskDialogTest {
                 onProfileChange = { },
                 isCreateEnabled = (InputValidator.validateTitle(title) == null) &&
                         (InputValidator.validateTagsAndWordCount(tags) == null),
+                onClickCreateButton = { },
+                onClickCloseButton = { },
+                modifier = Modifier,
             )
         }
 
@@ -167,6 +180,9 @@ class CreateNewTaskDialogTest {
                 onProfileChange = { },
                 isCreateEnabled = (InputValidator.validateTitle(title) == null) &&
                         (InputValidator.validateTagsAndWordCount(tags) == null),
+                onClickCreateButton = { },
+                onClickCloseButton = { },
+                modifier = Modifier,
             )
         }
         val input = "test1, test2, test3, test4, test5, test6"
@@ -200,6 +216,9 @@ class CreateNewTaskDialogTest {
                 onProfileChange = { },
                 isCreateEnabled = (InputValidator.validateTitle(title) == null) &&
                         (InputValidator.validateTagsAndWordCount(tags) == null),
+                onClickCreateButton = { },
+                onClickCloseButton = { },
+                modifier = Modifier,
             )
         }
         val input = "test1, test2,"
@@ -233,6 +252,9 @@ class CreateNewTaskDialogTest {
                 onProfileChange = { },
                 isCreateEnabled = (InputValidator.validateTitle("title") == null) &&
                         (InputValidator.validateTagsAndWordCount("") == null),
+                onClickCreateButton = { },
+                onClickCloseButton = { },
+                modifier = Modifier,
             )
         }
 

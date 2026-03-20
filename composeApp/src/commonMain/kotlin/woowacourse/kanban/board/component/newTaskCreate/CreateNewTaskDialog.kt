@@ -24,6 +24,7 @@ fun CreateNewTaskDialog(
     profileOptions: List<String>,
     onProfileChange: (Int) -> Unit,
     isCreateEnabled: Boolean,
+    onClickCreateButton: () -> Unit,
     onClickCloseButton: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -53,6 +54,7 @@ fun CreateNewTaskDialog(
         Box(modifier = Modifier.padding(vertical = 16.dp)) {
             CreateNewTaskDialogBottom(
                 onClickCloseButton = onClickCloseButton,
+                onClickCreateButton = onClickCreateButton,
                 isCreateEnabled = isCreateEnabled
             )
         }
@@ -76,6 +78,7 @@ private fun CreateNewTaskDialogPreview() {
         profileOptions = listOf("다이노", "페임스"),
         onProfileChange = { },
         onClickCloseButton = { },
+        onClickCreateButton = { },
         isCreateEnabled = true,
     )
 }

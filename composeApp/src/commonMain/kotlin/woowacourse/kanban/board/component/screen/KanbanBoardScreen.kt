@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,6 +23,7 @@ import woowacourse.kanban.board.InputValidator
 import woowacourse.kanban.board.component.kanbanboard.KanbanBoard
 import woowacourse.kanban.board.component.kanbanboard.KanbanBoardScreenTopBar
 import woowacourse.kanban.board.component.newTaskCreate.CreateNewTaskDialog
+import woowacourse.kanban.board.data.Tasks
 import woowacourse.kanban.board.tasksExample
 
 @Composable
@@ -32,6 +34,8 @@ fun KanbanBoardScreen() {
     var tags by remember { mutableStateOf("") }
     var selectedStatusIndex by remember { mutableStateOf(0) }
     var selectedProfileIndex by remember { mutableStateOf(0) }
+
+    val tasks = remember { Tasks(tasksExample.toMutableStateList()) }
 
     val statusOptions = listOf("To Do", "In Progress", "Done")
     val profileOptions = listOf("다이노", "페임스")
@@ -65,7 +69,23 @@ fun KanbanBoardScreen() {
             profileOptions = profileOptions,
             onProfileChange = { selectedProfileIndex = it },
             isCreateEnabled = isCreateEnabled,
-            onClickCloseButton = { isCreatingNewTask = !isCreatingNewTask },
+            onClickCreateButton = {
+                tasks.addNewTask(
+                    title,
+                    description,
+                    tags,
+                    statusOptions[selectedStatusIndex],
+                    profileOptions[selectedProfileIndex],
+                )
+
+                title = ""
+                description = ""
+                tags = ""
+                selectedStatusIndex = 0
+                selectedProfileIndex = 0
+                isCreatingNewTask = false
+            },
+            onClickCloseButton = { isCreatingNewTask = false },
             modifier = Modifier
                 .padding(
                     vertical = 15.dp,
