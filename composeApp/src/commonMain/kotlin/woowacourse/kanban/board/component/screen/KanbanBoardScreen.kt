@@ -44,7 +44,7 @@ fun KanbanBoardScreen() {
     }
 
     if (isCreatingNewTask) Dialog(
-        onDismissRequest = { isCreatingNewTask = !isCreatingNewTask },
+        onDismissRequest = { isCreatingNewTask = false },
         properties = DialogProperties(
             dismissOnBackPress = true,
             dismissOnClickOutside = true,
@@ -82,10 +82,10 @@ fun KanbanBoardScreen() {
         verticalArrangement = Arrangement.Top,
     ) {
         KanbanBoardScreenTopBar(
-            { isCreatingNewTask = !isCreatingNewTask },
+            { isCreatingNewTask = true },
         )
         KanbanBoard(
-            tasks = tasksExample,
+            tasks = tasks,
         )
     }
 }
