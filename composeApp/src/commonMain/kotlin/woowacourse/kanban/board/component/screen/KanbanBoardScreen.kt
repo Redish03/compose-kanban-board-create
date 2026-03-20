@@ -6,11 +6,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
@@ -19,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import kotlinx.coroutines.launch
 import woowacourse.kanban.board.InputValidator
 import woowacourse.kanban.board.component.kanbanboard.KanbanBoard
 import woowacourse.kanban.board.component.kanbanboard.KanbanBoardScreenTopBar
@@ -34,6 +39,9 @@ fun KanbanBoardScreen() {
     var tags by remember { mutableStateOf("") }
     var selectedStatusIndex by remember { mutableStateOf(0) }
     var selectedProfileIndex by remember { mutableStateOf(0) }
+    val scope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+
 
     val tasks = remember { Tasks(tasksExample.toMutableStateList()) }
 
@@ -78,6 +86,10 @@ fun KanbanBoardScreen() {
                     profileOptions[selectedProfileIndex],
                 )
 
+                scope.launch {
+                    snackbarHostState.showSnackbar("새로운 태스크가 추가되었습니다.")
+                }
+
                 title = ""
                 description = ""
                 tags = ""
@@ -87,29 +99,31 @@ fun KanbanBoardScreen() {
             },
             onClickCloseButton = { isCreatingNewTask = false },
             modifier = Modifier
-                .padding(
-                    vertical = 15.dp,
-                )
-                .background(
-                    color = Color.White,
-                )
+                .padding(vertical = 15.dp)
+                .background(color = Color.White)
                 .width(750.dp),
         )
     }
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Top,
-    ) {
-        KanbanBoardScreenTopBar(
-            tasksCount =tasks.tasksSize(),
-            completeCount = tasks.doneTasksSize(),
-            completeRate = tasks.calculateDoneTasksRatio(),
-            onClickCreateNewTaskButton = { isCreatingNewTask = true },
-        )
-        KanbanBoard(
-            tasks = tasks,
-        )
+    Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
+            verticalArrangement = Arrangement.Top,
+        ) {
+            KanbanBoardScreenTopBar(
+                tasksCount = tasks.tasksSize(),
+                completeCount = tasks.doneTasksSize(),
+                completeRate = tasks.calculateDoneTasksRatio(),
+                onClickCreateNewTaskButton = { isCreatingNewTask = true },
+            )
+            KanbanBoard(
+                tasks = tasks,
+            )
+        }
     }
 }
 
