@@ -65,6 +65,7 @@ fun KanbanBoardScreen() {
             profileOptions = profileOptions,
             onProfileChange = { selectedProfileIndex = it },
             isCreateEnabled = isCreateEnabled,
+            onClickCloseButton = { isCreatingNewTask = !isCreatingNewTask },
             modifier = Modifier
                 .padding(
                     vertical = 15.dp,

@@ -81,10 +81,6 @@ private fun CreateNewTaskDialogBottomPreview() {
     CreateNewTaskDialogBottom(true)
 }
 
-// 아래와 같이 Preview 해볼게 두개 이상인 경우에는 Column으로 묶기보단
-// 파라미터로 제공하는게 좋지 않을까?
-// 파라미터가 많다면?...
-
 @Preview
 @Composable
 private fun BottomButtonPreview() {

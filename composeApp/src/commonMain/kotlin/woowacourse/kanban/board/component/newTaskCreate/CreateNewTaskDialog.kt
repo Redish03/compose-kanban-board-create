@@ -24,12 +24,15 @@ fun CreateNewTaskDialog(
     profileOptions: List<String>,
     onProfileChange: (Int) -> Unit,
     isCreateEnabled: Boolean,
+    onClickCloseButton: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier,
     ) {
-        TopBar()
+        TopBar(
+            onClickCloseButton,
+        )
         HorizontalDivider()
         NewTaskForm(
             title = title,
@@ -69,6 +72,7 @@ private fun CreateNewTaskDialogPreview() {
         selectedProfileIndex = 0,
         profileOptions = listOf("다이노", "페임스"),
         onProfileChange = { },
+        onClickCloseButton = { },
         isCreateEnabled = true,
     )
 }
