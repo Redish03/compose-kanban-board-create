@@ -20,7 +20,7 @@ import kanbanboard.composeapp.generated.resources.cancel_button
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun TopBar(onClickCloseButton: () -> Unit,) {
+fun TopBar(onClickCloseButton: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -35,15 +35,15 @@ fun TopBar(onClickCloseButton: () -> Unit,) {
             ),
             fontWeight = FontWeight.SemiBold,
             fontSize = 20.sp,
-            )
+        )
         Icon(
             painter = painterResource(Res.drawable.cancel_button),
             contentDescription = "cancel button",
             modifier = Modifier
                 .size(24.dp)
                 .clickable(
-                    onClick = onClickCloseButton
-                )
+                    onClick = onClickCloseButton,
+                ),
         )
     }
 }

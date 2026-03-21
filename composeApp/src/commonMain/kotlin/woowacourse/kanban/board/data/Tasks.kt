@@ -1,6 +1,6 @@
 package woowacourse.kanban.board.data
 
-import kotlin.math.*
+import kotlin.math.round
 
 class Tasks(private val tasks: MutableList<Task>) {
     fun addNewTask(
@@ -25,7 +25,7 @@ class Tasks(private val tasks: MutableList<Task>) {
         val doneTasks = tasks.count { it.status == TaskStatus.DONE }
         val totalTasks = tasks.size
 
-        if(totalTasks == 0) return 0.0
+        if (totalTasks == 0) return 0.0
         return round((doneTasks.toDouble() / totalTasks.toDouble()) * 100)
     }
 
