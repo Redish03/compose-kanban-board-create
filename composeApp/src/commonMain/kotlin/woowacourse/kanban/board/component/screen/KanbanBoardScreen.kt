@@ -10,7 +10,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import kotlinx.coroutines.launch
-import woowacourse.kanban.board.InputValidator
 import woowacourse.kanban.board.component.kanbanboard.KanbanBoard
 import woowacourse.kanban.board.component.kanbanboard.KanbanBoardScreenTopBar
 import woowacourse.kanban.board.component.newTaskCreate.CreateNewTaskDialog
@@ -33,30 +31,18 @@ import woowacourse.kanban.board.tasksExample
 
 @Composable
 fun KanbanBoardScreen() {
-    var isCreatingNewTask by remember { mutableStateOf(false) }
-    var title by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
-    var tags by remember { mutableStateOf("") }
-    var selectedStatusIndex by remember { mutableStateOf(0) }
-    var selectedProfileIndex by remember { mutableStateOf(0) }
-    val scope = rememberCoroutineScope()
-    val snackbarHostState = remember { SnackbarHostState() }
-
-
     val tasks = remember { Tasks(tasksExample.toMutableStateList()) }
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
 
-    val statusOptions = listOf("To Do", "In Progress", "Done")
-    val profileOptions = listOf("다이노", "페임스")
-
-    val isCreateEnabled by remember(title, tags) {
-        derivedStateOf {
-            (InputValidator.validateTitle(title) == null) &&
-                    (InputValidator.validateTagsAndWordCount(tags) == null)
-        }
-    }
+    var isCreatingNewTask by remember { mutableStateOf(false) }
+    var dialogState by remember { mutableStateOf(CreateNewTaskDialogState()) }
 
     if (isCreatingNewTask) Dialog(
-        onDismissRequest = { isCreatingNewTask = false },
+        onDismissRequest = {
+            isCreatingNewTask = false
+            dialogState = CreateNewTaskDialogState()
+        },
         properties = DialogProperties(
             dismissOnBackPress = true,
             dismissOnClickOutside = true,
@@ -64,40 +50,30 @@ fun KanbanBoardScreen() {
         ),
     ) {
         CreateNewTaskDialog(
-            title = title,
-            onTitleChange = { title = it },
-            description = description,
-            onDescriptionChange = { description = it },
-            tags = tags,
-            onTagsChange = { tags = it },
-            selectedStatusIndex = selectedStatusIndex,
-            statusOptions = statusOptions,
-            onStatusChange = { selectedStatusIndex = it },
-            selectedProfileIndex = selectedProfileIndex,
-            profileOptions = profileOptions,
-            onProfileChange = { selectedProfileIndex = it },
-            isCreateEnabled = isCreateEnabled,
+            state = dialogState,
+            onTitleChange = { dialogState = dialogState.copy(title = it) },
+            onDescriptionChange = { dialogState = dialogState.copy(description = it) },
+            onTagsChange = { dialogState = dialogState.copy(tags = it) },
+            onStatusChange = { dialogState = dialogState.copy(selectedStatusIndex = it) },
+            onProfileChange = { dialogState = dialogState.copy(selectedProfileIndex = it) },
             onClickCreateButton = {
                 tasks.addNewTask(
-                    title,
-                    description,
-                    tags,
-                    statusOptions[selectedStatusIndex],
-                    profileOptions[selectedProfileIndex],
+                    dialogState.title,
+                    dialogState.description,
+                    dialogState.tags,
+                    dialogState.statusOptions[dialogState.selectedStatusIndex],
+                    dialogState.profileOptions[dialogState.selectedProfileIndex],
                 )
-
                 scope.launch {
                     snackbarHostState.showSnackbar("새로운 태스크가 추가되었습니다.")
                 }
-
-                title = ""
-                description = ""
-                tags = ""
-                selectedStatusIndex = 0
-                selectedProfileIndex = 0
                 isCreatingNewTask = false
+                dialogState = CreateNewTaskDialogState()
             },
-            onClickCloseButton = { isCreatingNewTask = false },
+            onClickCloseButton = {
+                isCreatingNewTask = false
+                dialogState = CreateNewTaskDialogState()
+            },
             modifier = Modifier
                 .padding(vertical = 15.dp)
                 .background(color = Color.White)

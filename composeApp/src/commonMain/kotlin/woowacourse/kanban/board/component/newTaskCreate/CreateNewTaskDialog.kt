@@ -8,22 +8,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import woowacourse.kanban.board.component.screen.CreateNewTaskDialogState
 
 @Composable
 fun CreateNewTaskDialog(
-    title: String,
+    state: CreateNewTaskDialogState,
     onTitleChange: (String) -> Unit,
-    description: String,
     onDescriptionChange: (String) -> Unit,
-    tags: String,
     onTagsChange: (String) -> Unit,
-    selectedStatusIndex: Int,
-    statusOptions: List<String>,
     onStatusChange: (Int) -> Unit,
-    selectedProfileIndex: Int,
-    profileOptions: List<String>,
     onProfileChange: (Int) -> Unit,
-    isCreateEnabled: Boolean,
     onClickCreateButton: () -> Unit,
     onClickCloseButton: () -> Unit,
     modifier: Modifier = Modifier,
@@ -36,17 +30,17 @@ fun CreateNewTaskDialog(
         )
         HorizontalDivider()
         NewTaskForm(
-            title = title,
+            title = state.title,
             onTitleChange = onTitleChange,
-            description = description,
+            description = state.description,
             onDescriptionChange = onDescriptionChange,
-            tags = tags,
+            tags = state.tags,
             onTagsChange = onTagsChange,
-            selectedStatusIndex = selectedStatusIndex,
-            statusOptions = statusOptions,
+            selectedStatusIndex = state.selectedStatusIndex,
+            statusOptions = state.statusOptions,
             onStatusChange = onStatusChange,
-            profileOptions = profileOptions,
-            selectedProfileIndex = selectedProfileIndex,
+            profileOptions = state.profileOptions,
+            selectedProfileIndex = state.selectedProfileIndex,
             onProfileChange = onProfileChange,
             modifier = Modifier.weight(1f),
         )
@@ -55,7 +49,7 @@ fun CreateNewTaskDialog(
             CreateNewTaskDialogBottom(
                 onClickCloseButton = onClickCloseButton,
                 onClickCreateButton = onClickCreateButton,
-                isCreateEnabled = isCreateEnabled
+                isCreateEnabled = state.isCreateEnabled,
             )
         }
     }
@@ -65,20 +59,13 @@ fun CreateNewTaskDialog(
 @Composable
 private fun CreateNewTaskDialogPreview() {
     CreateNewTaskDialog(
-        title = "제목제목",
+        state = CreateNewTaskDialogState(),
         onTitleChange = { },
-        description = "설명",
         onDescriptionChange = { },
-        tags = "안녕,사무엘",
         onTagsChange = { },
-        selectedStatusIndex = 0,
-        statusOptions = listOf("To Do", "In Progress", "Done"),
         onStatusChange = { },
-        selectedProfileIndex = 0,
-        profileOptions = listOf("다이노", "페임스"),
         onProfileChange = { },
         onClickCloseButton = { },
         onClickCreateButton = { },
-        isCreateEnabled = true,
     )
 }
