@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.component.newTeskCreate
+package woowacourse.kanban.board.component.newTaskCreate
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,7 +18,6 @@ import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
 import org.junit.Test
 import woowacourse.kanban.board.InputValidator
-import woowacourse.kanban.board.component.newTaskCreate.CreateNewTaskDialog
 
 @OptIn(ExperimentalTestApi::class)
 class CreateNewTaskDialogTest {
