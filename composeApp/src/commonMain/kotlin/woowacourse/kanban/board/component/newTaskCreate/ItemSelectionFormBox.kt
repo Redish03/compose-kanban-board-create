@@ -30,8 +30,7 @@ fun ItemSelectionFormBox(
             modifier = Modifier
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
-            // maxItemsInEachRow는 디폴트 값이 Int의 MAX임
-        ) {
+            ) {
             content()
         }
     }
@@ -52,7 +51,6 @@ private fun ItemSelectionFormBoxPreview() {
                     content = {
                         Profile(
                             nickname = "다이노",
-                            modifier = Modifier.align(Alignment.Center),
                         )
                     },
                 )
@@ -62,7 +60,6 @@ private fun ItemSelectionFormBoxPreview() {
                     content = {
                         Profile(
                             nickname = "페임스",
-                            modifier = Modifier.align(Alignment.Center),
                         )
                     },
                 )

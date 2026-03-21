@@ -34,7 +34,7 @@ fun KanbanBoardScreenTopBar(
     tasksCount: Int,
     completeCount: Int,
     completeRate: Double = 0.0,
-    onClickCreateNewTaskButton: () -> Unit
+    onClickCreateNewTaskButton: () -> Unit,
 ) {
     Column {
         Row(

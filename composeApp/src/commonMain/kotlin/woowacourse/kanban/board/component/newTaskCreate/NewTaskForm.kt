@@ -93,7 +93,7 @@ fun NewTaskForm(
                 DefaultSelectButton(
                     isSelected = selectedStatusIndex == index,
                     onClick = { onStatusChange(index) },
-                    content = { Text(status, modifier = Modifier.align(Alignment.Center)) },
+                    content = { Text(status) },
                 )
             }
         }
@@ -105,10 +105,7 @@ fun NewTaskForm(
                     isSelected = selectedProfileIndex == index,
                     onClick = { onProfileChange(index) },
                     content = {
-                        Profile(
-                            nickname = nickname,
-                            modifier = Modifier.align(Alignment.Center),
-                        )
+                        Profile(nickname = nickname)
                     },
                 )
             }
