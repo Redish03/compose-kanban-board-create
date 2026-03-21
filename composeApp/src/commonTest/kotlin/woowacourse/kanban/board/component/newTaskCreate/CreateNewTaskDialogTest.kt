@@ -61,10 +61,10 @@ class CreateNewTaskDialogTest {
         }
 
         val titleTextField = onNode(hasSetTextAction() and hasAnyAncestor(hasTestTag("title_textField")))
-        
+
         titleTextField.performTextInput("  ")
         onNodeWithText("생성").assertIsNotEnabled()
-        
+
         titleTextField.performTextClearance()
         titleTextField.performTextInput("\n\t")
         onNodeWithText("생성").assertIsNotEnabled()
