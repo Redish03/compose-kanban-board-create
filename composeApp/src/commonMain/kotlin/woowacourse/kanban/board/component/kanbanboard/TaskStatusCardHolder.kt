@@ -25,33 +25,31 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import woowacourse.kanban.board.component.task.TaskCard
 import woowacourse.kanban.board.data.Task
+import woowacourse.kanban.board.data.TaskStatusUIModel
 import woowacourse.kanban.board.tasksExample
 
 @Composable
 fun TaskStatusCardHolder(
     tasks: List<Task>,
-    taskStatusString: String,
     tasksSize: Int,
-    headerColor: Color,
-    backgroundColor: Color,
-    borderColor: Color,
+    tasksStatusUIModel: TaskStatusUIModel
 ) {
     Column(
         modifier = Modifier
             .clip(RoundedCornerShape(8.dp))
             .background(
-                color = backgroundColor,
+                color = tasksStatusUIModel.backgroundColor,
             )
             .width(320.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
         TaskStatusCardHolderHeader(
-            taskStatusString = taskStatusString,
+            taskStatusString = tasksStatusUIModel.text,
             tasksSize = tasksSize,
             modifier = Modifier
                 .background(
-                    color = headerColor,
+                    color = tasksStatusUIModel.headerColor,
                 )
                 .fillMaxWidth()
                 .padding(20.dp),
@@ -60,7 +58,7 @@ fun TaskStatusCardHolder(
             tasks = tasks,
             modifier = Modifier
                 .border(
-                    color = borderColor,
+                    color = tasksStatusUIModel.borderColor,
                     width = 1.dp,
                 )
                 .fillMaxWidth()
@@ -134,9 +132,6 @@ private fun TaskStatusCardHolderPreview() {
     TaskStatusCardHolder(
         tasks = tasksExample,
         tasksSize = tasksExample.size,
-        headerColor = Color(0xFF00A63E),
-        backgroundColor = Color(0xFFF0FDF4),
-        taskStatusString = "To Do",
-        borderColor = Color(0xFFB9F8CF),
+        tasksStatusUIModel = TaskStatusUIModel.TO_DO,
     )
 }

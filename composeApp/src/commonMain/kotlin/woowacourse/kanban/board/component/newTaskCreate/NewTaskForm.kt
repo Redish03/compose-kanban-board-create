@@ -34,6 +34,8 @@ import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.CustomColor
 import woowacourse.kanban.board.InputValidator
 import woowacourse.kanban.board.component.task.Profile
+import woowacourse.kanban.board.data.TaskStatus
+import woowacourse.kanban.board.data.TaskStatusUIModel.Companion.toUIModel
 
 @Composable
 fun NewTaskForm(
@@ -44,7 +46,7 @@ fun NewTaskForm(
     tags: String,
     onTagsChange: (String) -> Unit,
     selectedStatusIndex: Int,
-    statusOptions: List<String>,
+    statusOptions: List<TaskStatus>,
     onStatusChange: (Int) -> Unit,
     selectedProfileIndex: Int,
     profileOptions: List<String>,
@@ -93,7 +95,7 @@ fun NewTaskForm(
                 DefaultSelectButton(
                     isSelected = selectedStatusIndex == index,
                     onClick = { onStatusChange(index) },
-                    content = { Text(status) },
+                    content = { Text(status.toUIModel().text) },
                 )
             }
         }

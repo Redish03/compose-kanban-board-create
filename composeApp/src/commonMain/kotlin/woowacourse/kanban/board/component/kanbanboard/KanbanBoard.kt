@@ -8,7 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import woowacourse.kanban.board.CustomColor
+import woowacourse.kanban.board.data.TaskStatus
+import woowacourse.kanban.board.data.TaskStatusUIModel.Companion.toUIModel
 import woowacourse.kanban.board.data.Tasks
 import woowacourse.kanban.board.tasksExample
 
@@ -21,29 +22,21 @@ fun KanbanBoard(tasks: Tasks) {
         horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         TaskStatusCardHolder(
-            tasks = tasks.todoStatusTasks(),
-            tasksSize = tasks.todoStatusTasks().size,
-            headerColor = CustomColor.TODO_CARD_HOLDER_HEADER_COLOR.color,
-            backgroundColor = CustomColor.TODO_CARD_HOLDER_BACKGROUND_COLOR.color,
-            taskStatusString = "To Do",
-            borderColor = CustomColor.TODO_CARD_HOLDER_BORDER_COLOR.color,
+            tasks = tasks.filterTasksByStatus(TaskStatus.TO_DO),
+            tasksSize = tasks.filterTasksByStatus(TaskStatus.TO_DO).size,
+            tasksStatusUIModel = TaskStatus.TO_DO.toUIModel(),
         )
 
         TaskStatusCardHolder(
-            tasks = tasks.inProgressStatusTasks(),
-            tasksSize = tasks.inProgressStatusTasks().size,
-            headerColor = CustomColor.IN_PROGRESS_CARD_HOLDER_HEADER_COLOR.color,
-            backgroundColor = CustomColor.IN_PROGRESS_CARD_HOLDER_BACKGROUND_COLOR.color,
-            taskStatusString = "In Progress",
-            borderColor = CustomColor.IN_PROGRESS_CARD_HOLDER_BORDER_COLOR.color,
+            tasks = tasks.filterTasksByStatus(TaskStatus.IN_PROGRESS),
+            tasksSize = tasks.filterTasksByStatus(TaskStatus.IN_PROGRESS).size,
+            tasksStatusUIModel = TaskStatus.IN_PROGRESS.toUIModel(),
         )
+
         TaskStatusCardHolder(
-            tasks = tasks.doneStatusTasks(),
-            tasksSize = tasks.doneStatusTasks().size,
-            headerColor = CustomColor.DONE_CARD_HOLDER_HEADER_COLOR.color,
-            backgroundColor = CustomColor.DONE_CARD_HOLDER_BACKGROUND_COLOR.color,
-            taskStatusString = "Done",
-            borderColor = CustomColor.DONE_CARD_HOLDER_BORDER_COLOR.color,
+            tasks = tasks.filterTasksByStatus(TaskStatus.DONE),
+            tasksSize = tasks.filterTasksByStatus(TaskStatus.DONE).size,
+            tasksStatusUIModel = TaskStatus.DONE.toUIModel(),
         )
     }
 }

@@ -7,16 +7,16 @@ class Tasks(private val tasks: MutableList<Task>) {
         title: String,
         description: String,
         tags: String,
-        selectedStatus: String,
-        selectedProfile: String,
+        selectedStatus: TaskStatus,
+        selectedProfile: Nickname,
     ) {
         tasks.add(
             Task(
                 taskTitle = Title(title),
                 taskScript = Script(description),
                 tags = Tags(splitTags(tags)),
-                status = statusToTaskStatus(selectedStatus),
-                nickname = profileToNickname(selectedProfile),
+                status = selectedStatus,
+                nickname = selectedProfile,
             ),
         )
     }
@@ -42,19 +42,4 @@ class Tasks(private val tasks: MutableList<Task>) {
     } else {
         tags.split(',').map { it.trim() }.filter { it.isNotBlank() }
     }
-
-    private fun statusToTaskStatus(status: String): TaskStatus =
-        when (status) {
-            "To Do" -> TaskStatus.TO_DO
-            "In Progress" -> TaskStatus.IN_PROGRESS
-            "Done" -> TaskStatus.DONE
-            else -> throw IllegalArgumentException("Invalid status: $status")
-        }
-
-    private fun profileToNickname(profile: String): Nickname =
-        when (profile) {
-            "다이노" -> Nickname("다이노")
-            "페임스" -> Nickname("페임스")
-            else -> throw IllegalArgumentException("Invalid profile: $profile")
-        }
 }

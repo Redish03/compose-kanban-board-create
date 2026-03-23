@@ -1,6 +1,7 @@
 package woowacourse.kanban.board.component.screen
 
 import woowacourse.kanban.board.InputValidator
+import woowacourse.kanban.board.data.TaskStatus
 
 data class CreateNewTaskDialogState(
     val title: String = "",
@@ -8,7 +9,7 @@ data class CreateNewTaskDialogState(
     val tags: String = "",
     val selectedStatusIndex: Int = 0,
     val selectedProfileIndex: Int = 0,
-    val statusOptions: List<String> = listOf("To Do", "In Progress", "Done"),
+    val statusOptions: List<TaskStatus> = listOf(TaskStatus.TO_DO, TaskStatus.IN_PROGRESS, TaskStatus.DONE),
     val profileOptions: List<String> = listOf("다이노", "페임스"),
 ) {
     val isCreateEnabled: Boolean

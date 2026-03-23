@@ -26,6 +26,7 @@ import kotlinx.coroutines.launch
 import woowacourse.kanban.board.component.kanbanboard.KanbanBoard
 import woowacourse.kanban.board.component.kanbanboard.KanbanBoardScreenTopBar
 import woowacourse.kanban.board.component.newTaskCreate.CreateNewTaskDialog
+import woowacourse.kanban.board.data.Nickname
 import woowacourse.kanban.board.data.Tasks
 
 @Composable
@@ -61,7 +62,7 @@ fun KanbanBoardScreen() {
                     dialogState.description,
                     dialogState.tags,
                     dialogState.statusOptions[dialogState.selectedStatusIndex],
-                    dialogState.profileOptions[dialogState.selectedProfileIndex],
+                    Nickname(dialogState.profileOptions[dialogState.selectedProfileIndex]),
                 )
                 scope.launch {
                     snackbarHostState.showSnackbar("새로운 태스크가 추가되었습니다.")
