@@ -12,10 +12,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -102,9 +98,8 @@ fun CreateNewTaskButton(onClickCreateNewTaskButton: () -> Unit) {
 
 @Composable
 fun TaskProgressBar(completeRate: Double) {
-    var currentProgress by remember { mutableStateOf(completeRate.toFloat()) }
     LinearProgressIndicator(
-        progress = { currentProgress },
+        progress = { completeRate.toFloat() / 100 },
         modifier = Modifier.fillMaxWidth(),
         color = CustomColor.CREATE_NEW_TASK_BUTTON_COLOR.color,
         trackColor = CustomColor.CARD_BORDER.color,
@@ -145,5 +140,5 @@ private fun CreateNewTaskButtonPreview() {
 @Preview
 @Composable
 private fun TaskProgressBarPreview() {
-    TaskProgressBar(0.7)
+    TaskProgressBar(70.0)
 }
