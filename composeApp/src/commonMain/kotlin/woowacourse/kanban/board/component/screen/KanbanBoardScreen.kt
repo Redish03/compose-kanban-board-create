@@ -11,11 +11,11 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,11 +27,10 @@ import woowacourse.kanban.board.component.kanbanboard.KanbanBoard
 import woowacourse.kanban.board.component.kanbanboard.KanbanBoardScreenTopBar
 import woowacourse.kanban.board.component.newTaskCreate.CreateNewTaskDialog
 import woowacourse.kanban.board.data.Tasks
-import woowacourse.kanban.board.tasksExample
 
 @Composable
 fun KanbanBoardScreen() {
-    val tasks = remember { Tasks(tasksExample.toMutableStateList()) }
+    val tasks = remember { Tasks(mutableStateListOf()) }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
