@@ -32,10 +32,10 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import woowacourse.kanban.board.CustomColor
+import woowacourse.kanban.board.TaskStatusUIModel.Companion.toUIModel
 import woowacourse.kanban.board.component.task.Profile
 import woowacourse.kanban.board.data.Tags.Companion.validateTagsAndWordCount
 import woowacourse.kanban.board.data.TaskStatus
-import woowacourse.kanban.board.data.TaskStatusUIModel.Companion.toUIModel
 import woowacourse.kanban.board.data.Title.Companion.validateTitle
 
 @Composable

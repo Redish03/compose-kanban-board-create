@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import woowacourse.kanban.board.TaskStatusUIModel.Companion.toUIModel
 import woowacourse.kanban.board.data.TaskStatus
-import woowacourse.kanban.board.data.TaskStatusUIModel.Companion.toUIModel
 import woowacourse.kanban.board.data.Tasks
 import woowacourse.kanban.board.tasksExample
 
