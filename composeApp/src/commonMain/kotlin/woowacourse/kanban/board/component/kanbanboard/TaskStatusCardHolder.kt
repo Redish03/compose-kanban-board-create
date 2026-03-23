@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -108,14 +110,11 @@ private fun TaskCardHolder(
     tasks: List<Task>,
     modifier: Modifier = Modifier,
 ) {
-    FlowRow(
-        modifier = modifier
-            .verticalScroll(rememberScrollState()),
-        maxItemsInEachRow = 1,
-        horizontalArrangement = Arrangement.Center,
+    LazyColumn(
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
-        tasks.forEach { task ->
+        items(tasks) { task ->
             TaskCard(
                 task.taskTitle.titleText,
                 task.taskScript.scriptText,
