@@ -23,4 +23,4 @@
 - [ ] `fun validateDescription(value: String): String? = null` 고치기
 - [ ] `InputValidator` 대신 동반 객체로 Task를 검증
 - [ ] 테스트코드 수정
-- [ ] UI <-> 도메인 간 코드 변환 수정
+- [x] UI <-> 도메인 간 코드 변환 수정

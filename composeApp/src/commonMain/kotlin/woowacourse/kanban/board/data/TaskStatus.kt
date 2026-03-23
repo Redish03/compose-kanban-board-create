@@ -1,6 +1,7 @@
 package woowacourse.kanban.board.data
 
-import androidx.annotation.ColorRes
+import androidx.compose.ui.graphics.Color
+import woowacourse.kanban.board.CustomColor
 
 enum class TaskStatus {
     TO_DO,
@@ -8,10 +9,30 @@ enum class TaskStatus {
     DONE,
 }
 
-enum class TaskStatusUIModel(@ColorRes val color: Int, val text: String) {
-    TO_DO(color = 1234556, text = "Abc"),
-    IN_PROGRESS(color = 1234556, text = "Abc"),
-    DONE(color = 1234556, text = "Abc");
+enum class TaskStatusUIModel(
+    val headerColor: Color,
+    val backgroundColor: Color,
+    val borderColor: Color,
+    val text: String,
+) {
+    TO_DO(
+        headerColor = CustomColor.TODO_CARD_HOLDER_HEADER_COLOR.color,
+        backgroundColor = CustomColor.TODO_CARD_HOLDER_BACKGROUND_COLOR.color,
+        borderColor = CustomColor.TODO_CARD_HOLDER_BORDER_COLOR.color,
+        text = "To Do",
+    ),
+    IN_PROGRESS(
+        headerColor = CustomColor.IN_PROGRESS_CARD_HOLDER_HEADER_COLOR.color,
+        backgroundColor = CustomColor.IN_PROGRESS_CARD_HOLDER_BACKGROUND_COLOR.color,
+        borderColor = CustomColor.IN_PROGRESS_CARD_HOLDER_BORDER_COLOR.color,
+        text = "In Progress",
+    ),
+    DONE(
+        headerColor = CustomColor.DONE_CARD_HOLDER_HEADER_COLOR.color,
+        backgroundColor = CustomColor.DONE_CARD_HOLDER_BACKGROUND_COLOR.color,
+        borderColor = CustomColor.DONE_CARD_HOLDER_BORDER_COLOR.color,
+        text = "Done",
+    );
 
     companion object {
         fun TaskStatusUIModel.toDomain(): TaskStatus {
@@ -30,5 +51,4 @@ enum class TaskStatusUIModel(@ColorRes val color: Int, val text: String) {
             }
         }
     }
-
 }
