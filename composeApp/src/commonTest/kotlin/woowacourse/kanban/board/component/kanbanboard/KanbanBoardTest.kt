@@ -35,13 +35,4 @@ class KanbanBoardTest {
 
         onAllNodesWithText("0").assertCountEquals(3)
     }
-
-    private fun createTask(title: String, status: TaskStatus): Task {
-        return Task(
-            taskTitle = Title(title),
-            taskScript = Script("설명"),
-            status = status,
-            nickname = Nickname("사용자"),
-        )
-    }
 }

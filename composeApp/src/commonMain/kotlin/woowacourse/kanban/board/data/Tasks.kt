@@ -1,5 +1,6 @@
 package woowacourse.kanban.board.data
 
+import woowacourse.kanban.board.data.Tags.Companion.TAG_DELIMITER
 import kotlin.math.round
 
 class Tasks(private val tasks: MutableList<Task>) {
@@ -40,6 +41,6 @@ class Tasks(private val tasks: MutableList<Task>) {
     private fun splitTags(tags: String): List<String> = if (tags.isBlank()) {
         emptyList()
     } else {
-        tags.split(',').map { it.trim() }.filter { it.isNotBlank() }
+        tags.split(TAG_DELIMITER).map { it.trim() }.filter { it.isNotBlank() }
     }
 }

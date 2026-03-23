@@ -12,12 +12,10 @@ class NicknameTest {
         val nickname3 = "\n"
         val nickname4 = "\n\t"
 
-        assertThrows(IllegalArgumentException::class.java) {
-            Nickname(nickname)
-            Nickname(nickname2)
-            Nickname(nickname3)
-            Nickname(nickname4)
-        }
+        assertThrows(IllegalArgumentException::class.java) { Nickname(nickname) }
+        assertThrows(IllegalArgumentException::class.java) { Nickname(nickname2) }
+        assertThrows(IllegalArgumentException::class.java) { Nickname(nickname3) }
+        assertThrows(IllegalArgumentException::class.java) { Nickname(nickname4) }
     }
 
     @Test
@@ -25,7 +23,7 @@ class NicknameTest {
         val nickname = "nickname"
 
         assertThatNoException().isThrownBy(
-            { Nickname(nickname)},
+            { Nickname(nickname) },
         )
     }
 }

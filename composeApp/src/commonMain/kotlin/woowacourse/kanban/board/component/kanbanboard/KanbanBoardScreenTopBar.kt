@@ -66,7 +66,7 @@ private fun KanbanBoardTopBarTitle(
             fontWeight = FontWeight.SemiBold,
         )
         Text(
-            text = "완료율: ${completeRate.toInt()}% (${completeCount}/${tasksCount}})",
+            text = "완료율: ${completeRate.toInt()}% (${completeCount}/${tasksCount})",
             color = Color.Gray,
             fontSize = 9.sp,
         )
