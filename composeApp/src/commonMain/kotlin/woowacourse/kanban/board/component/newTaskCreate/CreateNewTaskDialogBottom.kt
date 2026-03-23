@@ -51,7 +51,7 @@ fun CreateNewTaskDialogBottom(
 }
 
 @Composable
-fun BottomButton(
+private fun BottomButton(
     text: String,
     textColor: Color,
     backgroundColor: Color,

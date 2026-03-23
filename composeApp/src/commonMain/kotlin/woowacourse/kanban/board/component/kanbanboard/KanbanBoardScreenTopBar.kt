@@ -54,7 +54,7 @@ fun KanbanBoardScreenTopBar(
 }
 
 @Composable
-fun KanbanBoardTopBarTitle(
+private fun KanbanBoardTopBarTitle(
     tasksCount: Int,
     completeCount: Int,
     completeRate: Double,
@@ -74,7 +74,7 @@ fun KanbanBoardTopBarTitle(
 }
 
 @Composable
-fun CreateNewTaskButton(onClickCreateNewTaskButton: () -> Unit) {
+private fun CreateNewTaskButton(onClickCreateNewTaskButton: () -> Unit) {
     Button(
         onClick = onClickCreateNewTaskButton,
         shape = RoundedCornerShape(8.dp),
@@ -97,7 +97,7 @@ fun CreateNewTaskButton(onClickCreateNewTaskButton: () -> Unit) {
 }
 
 @Composable
-fun TaskProgressBar(completeRate: Double) {
+private fun TaskProgressBar(completeRate: Double) {
     LinearProgressIndicator(
         progress = { completeRate.toFloat() / 100 },
         modifier = Modifier.fillMaxWidth(),

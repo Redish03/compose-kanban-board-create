@@ -37,7 +37,6 @@ fun KanbanBoard(tasks: Tasks) {
             taskStatusString = "In Progress",
             borderColor = CustomColor.IN_PROGRESS_CARD_HOLDER_BORDER_COLOR.color,
         )
-
         TaskStatusCardHolder(
             tasks = tasks.doneStatusTasks(),
             tasksSize = tasks.doneStatusTasks().size,

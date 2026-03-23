@@ -19,7 +19,7 @@
 - [x] 테스트용으로 만든 태스크 코드 지우기
 - [ ] `Tasks`의 각 상태마다 하나씩 함수로 만든 로직을 하나의 함수로 묶기
 - [x] 프로그레스 바 업데이트 로직 수정
-- [ ] 해당 파일 안에서만 사용하는 컴포저블 함수는 가시성 `private` 제한
+- [x] 해당 파일 안에서만 사용하는 컴포저블 함수는 가시성 `private` 제한
 - [ ] `fun validateDescription(value: String): String? = null` 고치기
 - [ ] `InputValidator` 대신 동반 객체로 Task를 검증
 - [ ] 테스트코드 수정

@@ -70,12 +70,11 @@ fun TaskStatusCardHolder(
                     horizontal = 10.dp,
                 ),
         )
-
     }
 }
 
 @Composable
-fun TaskStatusCardHolderHeader(
+private fun TaskStatusCardHolderHeader(
     taskStatusString: String,
     tasksSize: Int,
     modifier: Modifier = Modifier,
@@ -107,7 +106,7 @@ fun TaskStatusCardHolderHeader(
 }
 
 @Composable
-fun TaskCardHolder(
+private fun TaskCardHolder(
     tasks: List<Task>,
     modifier: Modifier = Modifier,
 ) {

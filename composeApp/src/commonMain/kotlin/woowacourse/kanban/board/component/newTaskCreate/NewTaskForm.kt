@@ -114,7 +114,7 @@ fun NewTaskForm(
 }
 
 @Composable
-fun DefaultTextField(
+private fun DefaultTextField(
     value: String,
     text: String,
     onValueChange: (String) -> Unit,
