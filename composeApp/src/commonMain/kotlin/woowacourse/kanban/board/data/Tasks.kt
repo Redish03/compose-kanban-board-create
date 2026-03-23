@@ -32,10 +32,11 @@ class Tasks(private val tasks: MutableList<Task>) {
     fun tasksSize() = tasks.size
     fun doneTasksSize() = tasks.count { it.status == TaskStatus.DONE }
 
-    fun todoStatusTasks(): List<Task> = tasks.filter { it.status == TaskStatus.TO_DO }
-    fun inProgressStatusTasks(): List<Task> = tasks.filter { it.status == TaskStatus.IN_PROGRESS }
-    fun doneStatusTasks(): List<Task> = tasks.filter { it.status == TaskStatus.DONE }
-
+    fun filterTasksByStatus(status: TaskStatus): List<Task> = when(status) {
+        TaskStatus.TO_DO -> tasks.filter { it.status == TaskStatus.TO_DO }
+        TaskStatus.IN_PROGRESS -> tasks.filter { it.status == TaskStatus.IN_PROGRESS }
+        TaskStatus.DONE -> tasks.filter { it.status == TaskStatus.DONE }
+    }
     private fun splitTags(tags: String): List<String> = if (tags.isBlank()) {
         emptyList()
     } else {
