@@ -21,7 +21,7 @@
 - [x] 태스크 상태 별 색상 분리, 하드 코딩 된 코드 수정
 - [x] 프로그레스 바 업데이트 로직 수정
 - [x] 해당 파일 안에서만 사용하는 컴포저블 함수는 가시성 `private` 제한
-- [ ] `fun validateDescription(value: String): String? = null` 고치기
-- [ ] `InputValidator` 대신 동반 객체로 Task를 검증
+- [x] `fun validateDescription(value: String): String? = null` 고치기
+- [x] `InputValidator` 대신 동반 객체로 Task를 검증
 - [ ] 테스트코드 수정
 - [x] UI <-> 도메인 간 코드 변환 수정

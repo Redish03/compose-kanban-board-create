@@ -1,7 +1,8 @@
 package woowacourse.kanban.board.component.screen
 
-import woowacourse.kanban.board.InputValidator
+import woowacourse.kanban.board.data.Tags.Companion.validateTagsAndWordCount
 import woowacourse.kanban.board.data.TaskStatus
+import woowacourse.kanban.board.data.Title.Companion.validateTitle
 
 data class CreateNewTaskDialogState(
     val title: String = "",
@@ -13,6 +14,6 @@ data class CreateNewTaskDialogState(
     val profileOptions: List<String> = listOf("다이노", "페임스"),
 ) {
     val isCreateEnabled: Boolean
-        get() = (InputValidator.validateTitle(title) == null) &&
-                (InputValidator.validateTagsAndWordCount(tags) == null)
+        get() = validateTitle(title) == null &&
+                validateTagsAndWordCount(tags) == null
 }

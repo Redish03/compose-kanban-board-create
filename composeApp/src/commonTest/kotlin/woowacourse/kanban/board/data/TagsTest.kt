@@ -1,8 +1,8 @@
 package woowacourse.kanban.board.data
 
-import org.assertj.core.api.Assertions.assertThatNoException
 import org.junit.Assert.assertThrows
-import kotlin.test.Test
+import org.junit.Test
+import kotlin.test.assertEquals
 
 class TagsTest {
     @Test
@@ -12,23 +12,21 @@ class TagsTest {
 
         assertThrows(IllegalArgumentException::class.java) {
             Tags(wrongTag1)
+        }
+
+        assertThrows(IllegalArgumentException::class.java) {
             Tags(wrongTag2)
         }
     }
 
     @Test
-    fun `태그가 비어있거나 형식에 맞을 경우 Task를 생성한다`() {
-        val correctTag1 = emptyList<String>()
-        val correctTag2 = listOf("tag1")
-        val correctTag3 = listOf("tag1", "tag2", "tag3", "tag4", "tag5")
-        val correctTag4 = listOf("   ")
+    fun `정상적인 태그거나 값이 안들어 온 경우 null을 반환한다`() {
+        val testString1 = ""
+        val testString2 = "Tag1"
+        val testString3 = "Tag1, Tag2, Tag3, Tag4, Tag5"
 
-        assertThatNoException().isThrownBy {
-            Tags(correctTag1)
-            Tags(correctTag2)
-            Tags(correctTag3)
-            Tags(correctTag4)
-        }
-
+        assertEquals(null, Tags.validateTagsAndWordCount(testString1))
+        assertEquals(null, Tags.validateTagsAndWordCount(testString2))
+        assertEquals(null, Tags.validateTagsAndWordCount(testString3))
     }
 }

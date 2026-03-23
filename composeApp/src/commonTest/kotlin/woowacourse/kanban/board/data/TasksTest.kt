@@ -9,7 +9,7 @@ class TasksTest {
     fun `태스크를 추가하면 전체 태스크 수가 증가한다`() {
         val tasks = Tasks(mutableListOf())
 
-        tasks.addNewTask("제목", "설명", "태그1, 태그2", "To Do", "다이노")
+        tasks.addNewTask("제목", "설명", "태그1, 태그2", TaskStatus.DONE, Nickname("다이노"))
 
         assertEquals(1, tasks.tasksSize())
     }
@@ -19,7 +19,7 @@ class TasksTest {
         val taskList = mutableListOf<Task>()
         val tasks = Tasks(taskList)
 
-        tasks.addNewTask("제목", "설명", " 태그1 , 태그2 ", "To Do", "다이노")
+        tasks.addNewTask("제목", "설명", " 태그1 , 태그2 ", TaskStatus.TO_DO, Nickname("다이노"))
 
         val addedTask = taskList[0]
         assertEquals(listOf("태그1", "태그2"), addedTask.tags.tags)
@@ -28,8 +28,8 @@ class TasksTest {
     @Test
     fun `완료된 태스크 비율이 올바르게 계산된다`() {
         val tasks = Tasks(mutableListOf())
-        tasks.addNewTask("T1", "D1", "", "Done", "다이노")    // 완료
-        tasks.addNewTask("T2", "D2", "", "To Do", "다이노")   // 미완료
+        tasks.addNewTask("T1", "D1", "", TaskStatus.DONE, Nickname("다이노"))    // 완료
+        tasks.addNewTask("T2", "D2", "", TaskStatus.TO_DO, Nickname("다이노"))   // 미완료
 
         val ratio = tasks.calculateDoneTasksRatio()
 
@@ -39,9 +39,9 @@ class TasksTest {
     @Test
     fun `완료율 계산 시 반올림이 적용된다`() {
         val tasks = Tasks(mutableListOf())
-        tasks.addNewTask("T1", "", "", "Done", "다이노")
-        tasks.addNewTask("T2", "", "", "Done", "다이노")
-        tasks.addNewTask("T3", "", "", "To Do", "다이노")
+        tasks.addNewTask("T1", "", "", TaskStatus.DONE, Nickname("다이노"))
+        tasks.addNewTask("T2", "", "", TaskStatus.DONE, Nickname("다이노"))
+        tasks.addNewTask("T3", "", "", TaskStatus.TO_DO, Nickname("다이노"))
 
         assertEquals(67.0, tasks.calculateDoneTasksRatio())
     }
@@ -56,17 +56,17 @@ class TasksTest {
     @Test
     fun `상태별로 태스크를 올바르게 필터링한다`() {
         val tasks = Tasks(mutableListOf())
-        tasks.addNewTask("T1", "", "", "To Do", "다이노")
-        tasks.addNewTask("T2", "", "", "In Progress", "다이노")
-        tasks.addNewTask("T3", "", "", "Done", "다이노")
+        tasks.addNewTask("T1", "", "", TaskStatus.TO_DO, Nickname("다이노"))
+        tasks.addNewTask("T2", "", "", TaskStatus.IN_PROGRESS, Nickname("다이노"))
+        tasks.addNewTask("T3", "", "", TaskStatus.DONE, Nickname("다이노"))
 
-        assertEquals(1, tasks.todoStatusTasks().size)
-        assertEquals(1, tasks.inProgressStatusTasks().size)
-        assertEquals(1, tasks.doneStatusTasks().size)
+        assertEquals(1, tasks.filterTasksByStatus(TaskStatus.TO_DO).size)
+        assertEquals(1, tasks.filterTasksByStatus(TaskStatus.IN_PROGRESS).size)
+        assertEquals(1, tasks.filterTasksByStatus(TaskStatus.IN_PROGRESS).size)
 
-        assertEquals("T1", tasks.todoStatusTasks()[0].taskTitle.titleText)
-        assertEquals("T2", tasks.inProgressStatusTasks()[0].taskTitle.titleText)
-        assertEquals("T3", tasks.doneStatusTasks()[0].taskTitle.titleText)
+        assertEquals("T1", tasks.filterTasksByStatus(TaskStatus.TO_DO)[0].taskTitle.titleText)
+        assertEquals("T2", tasks.filterTasksByStatus(TaskStatus.IN_PROGRESS)[0].taskTitle.titleText)
+        assertEquals("T3", tasks.filterTasksByStatus(TaskStatus.DONE)[0].taskTitle.titleText)
     }
 
     @Test
@@ -74,7 +74,7 @@ class TasksTest {
         val taskList = mutableListOf<Task>()
         val tasks = Tasks(taskList)
 
-        tasks.addNewTask("제목", "", "  ", "To Do", "다이노")
+        tasks.addNewTask("제목", "", "  ", TaskStatus.TO_DO, Nickname("다이노"))
 
         assertTrue(taskList[0].tags.tags.isEmpty())
     }
